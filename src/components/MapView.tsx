@@ -31,10 +31,18 @@ interface MapViewProps {
 }
 
 export const MapView: React.FC<MapViewProps> = ({ centro }) => {
-  if (!centro || !centro.latitud || !centro.longitud) {
+  // Coordenadas válidas para Chile deben estar en el hemisferio sur y occidental (negativas)
+  const hasValidCoords = centro && 
+    centro.latitud !== 0 && 
+    centro.longitud !== 0 && 
+    centro.latitud < 0 && 
+    centro.longitud < 0;
+
+  if (!centro || !hasValidCoords) {
     return (
-      <div className="h-48 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-200 text-slate-400 text-sm">
-        Mapa no disponible
+      <div className="h-56 w-full bg-slate-100 rounded-xl flex flex-col items-center justify-center border border-slate-200 text-slate-400 text-sm gap-2">
+        <span className="font-semibold">Ubicación geográfica no disponible</span>
+        <span className="text-xs text-slate-400 text-center px-4">Este centro no tiene coordenadas registradas en el DEIS.</span>
       </div>
     );
   }
