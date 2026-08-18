@@ -18,7 +18,11 @@ L.Icon.Default.mergeOptions({
 // Componente para actualizar dinámicamente la vista del mapa cuando cambia el centro seleccionado
 function ChangeView({ center }: { center: [number, number] }) {
   const map = useMap();
-  map.setView(center, 15);
+  React.useEffect(() => {
+    // Forzar rediseño de Leaflet al cambiar de centro (evita tiles grises o desalineamientos)
+    map.invalidateSize();
+    map.flyTo(center, 15, { animate: true, duration: 1.5 });
+  }, [center, map]);
   return null;
 }
 
