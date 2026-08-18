@@ -1,5 +1,6 @@
 import { X, MapPin, Phone, Building, ExternalLink, Calendar, Share2 } from 'lucide-react';
 import type { CentroMedico } from '../types';
+import { MapView } from './MapView';
 
 interface DetailModalProps {
   centro: CentroMedico | null;
@@ -51,6 +52,9 @@ export const DetailModal: React.FC<DetailModalProps> = ({ centro, onClose }) => 
 
         {/* Content */}
         <div className="p-6 overflow-y-auto space-y-5">
+          {/* Mapa de ubicación */}
+          <MapView centro={centro} />
+
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <MapPin className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
