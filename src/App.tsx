@@ -146,6 +146,16 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 py-8">
+        
+        {/* Banner de Prueba - Google AdSense (Simulación en Entorno de Prueba) */}
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-center gap-2">
+            <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-300 uppercase tracking-wider">Anuncio de Prueba</span>
+            <p className="text-xs text-slate-600 font-medium">Espacio publicitario reservado para Google AdSense (Banner Horizontal Responsivo)</p>
+          </div>
+          <span className="text-[10px] text-slate-400 font-mono">Format: auto | Slot: 98319204</span>
+        </div>
+
         {/* Filtros */}
         <Filters
           searchTerm={searchTerm}
