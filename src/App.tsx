@@ -1,14 +1,19 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Heart, ShieldCheck, MapPin, Database, Award, HelpCircle } from 'lucide-react';
+import { Heart, ShieldCheck, MapPin, Database, Award, HelpCircle, ArrowLeft } from 'lucide-react';
 import type { CentroMedico } from './types';
 import { Filters } from './components/Filters';
 import { MedicalCenterCard } from './components/MedicalCenterCard';
 import { DetailModal } from './components/DetailModal';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { HomeLanding } from './components/HomeLanding';
 
 export default function App() {
   const [centros, setCentros] = useState<CentroMedico[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Control de vistas (home, search, privacy)
+  const [currentView, setCurrentView] = useState<'home' | 'search' | 'privacy'>('home');
 
   // Estados de filtros
   const [searchTerm, setSearchTerm] = useState('');
@@ -108,44 +113,35 @@ export default function App() {
     observer.observe(node);
   };
 
+  // Renders según la vista activa
+  if (currentView === 'privacy') {
+    return <PrivacyPolicy onBack={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'home') {
+    return (
+      <HomeLanding 
+        onStartSearch={() => setCurrentView('search')} 
+        onViewPrivacy={() => setCurrentView('privacy')} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-      {/* Top Banner */}
-      <div className="bg-gradient-to-r from-blue-700 to-indigo-800 text-white text-center py-2.5 px-4 text-xs font-semibold tracking-wide flex items-center justify-center gap-1.5 shadow-sm">
-        <ShieldCheck className="h-4 w-4 text-emerald-400" />
-        Plataforma 100% gratuita y colaborativa de salud chilena
-      </div>
-
-      {/* Main Header */}
-      <header className="bg-white border-b border-slate-200 py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-600 p-2.5 rounded-2xl text-white shadow-md shadow-blue-500/25">
-              <Heart className="h-7 w-7 fill-white/10" />
-            </div>
-            <div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                SaludChile <span className="text-xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-md border border-blue-200">BETA</span>
-              </h1>
-              <p className="text-slate-500 text-sm mt-0.5">Buscador y directorio oficial de centros de salud públicos y privados de Chile</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-5 text-sm text-slate-600 bg-slate-50 border border-slate-100 px-4 py-2 rounded-xl">
-            <div className="flex items-center gap-1.5">
-              <Database className="h-4 w-4 text-blue-600" />
-              <span className="font-bold text-slate-800">{centros.length}</span> Establecimientos
-            </div>
-            <div className="h-4 w-px bg-slate-200" />
-            <div className="flex items-center gap-1.5">
-              <MapPin className="h-4 w-4 text-blue-600" />
-              Todas las comunas
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content Area */}
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 py-8">
+        {/* Barra superior de navegación interna */}
+        <div className="flex items-center gap-3 mb-6">
+          <button 
+            onClick={() => setCurrentView('home')}
+            className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors shadow-sm cursor-pointer"
+            title="Volver a Inicio"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Volver al Inicio
+          </button>
+        </div>
         
         {/* Banner de Prueba - Google AdSense (Simulación en Entorno de Prueba) */}
         <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
@@ -174,7 +170,7 @@ export default function App() {
         {/* Carga o Errores */}
         {loading && (
           <div className="py-20 text-center space-y-4">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" />
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-emerald-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" />
             <p className="text-slate-500 font-medium">Cargando centros de salud del país...</p>
           </div>
         )}
@@ -196,7 +192,7 @@ export default function App() {
               {filteredCentros.length === 0 && (
                 <button
                   onClick={handleClearFilters}
-                  className="text-sm text-blue-600 font-semibold hover:underline"
+                  className="text-sm text-emerald-600 font-semibold hover:underline"
                 >
                   Limpiar filtros para ver todo
                 </button>
@@ -218,7 +214,7 @@ export default function App() {
                 {/* Elemento de trigger del Infinite Scroll */}
                 {visibleCount < filteredCentros.length && (
                   <div ref={observerRef} className="py-10 text-center flex justify-center">
-                    <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-blue-600 border-r-transparent" />
+                    <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-emerald-600 border-r-transparent" />
                     <span className="ml-2 text-slate-500 text-sm font-semibold">Cargando más centros...</span>
                   </div>
                 )}
@@ -243,21 +239,60 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-10 px-6 border-t border-slate-800 mt-20">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2.5">
-            <div className="bg-blue-600/20 p-2 rounded-xl text-blue-500">
-              <Heart className="h-5 w-5" />
+      <footer className="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800 mt-20">
+        <div className="max-w-7xl mx-auto flex flex-col gap-8">
+          {/* Fusión de Header en el Footer */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
+            <div className="flex items-center gap-3">
+              <div className="bg-emerald-600/20 p-2.5 rounded-2xl text-emerald-500">
+                <Heart className="h-7 w-7 fill-emerald-500/10" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                  Centros Medicos Chile <span className="text-xs bg-slate-800 text-emerald-400 font-bold px-2 py-0.5 rounded-md border border-slate-700">BETA</span>
+                </h2>
+                <p className="text-slate-400 text-xs mt-0.5">Buscador y directorio oficial de centros de salud de Chile</p>
+              </div>
             </div>
-            <span className="text-white font-bold tracking-tight">SaludChile</span>
+            
+            {/* Widget de base de datos trasladado */}
+            <div className="flex items-center gap-4 text-xs text-slate-300 bg-slate-800/40 border border-slate-800/80 px-4 py-2 rounded-xl">
+              <div className="flex items-center gap-1.5">
+                <Database className="h-3.5 w-3.5 text-emerald-500" />
+                <span><strong className="text-white">{centros.length}</strong> Establecimientos</span>
+              </div>
+              <div className="h-3 w-px bg-slate-700" />
+              <div className="flex items-center gap-1.5">
+                <MapPin className="h-3.5 w-3.5 text-emerald-500" />
+                <span>Todas las comunas</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs">
-            <Award className="h-4 w-4 text-amber-500" />
-            Datos recopilados de fuentes de Datos Abiertos del Gobierno de Chile y DEIS.
+
+          {/* Enlaces y Copyright */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+            <div className="flex flex-col gap-1 text-slate-400">
+              <div className="flex items-center gap-1.5">
+                <Award className="h-4 w-4 text-amber-500 shrink-0" />
+                <span>Datos extraídos de fuentes públicas del Ministerio de Salud y DEIS de Chile.</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-slate-500">
+                <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                <span>Plataforma 100% gratuita y colaborativa de salud chilena.</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4 shrink-0">
+              <button 
+                onClick={() => setCurrentView('privacy')} 
+                className="hover:text-white transition-colors cursor-pointer underline"
+              >
+                Políticas de Privacidad
+              </button>
+              <span className="text-slate-700">|</span>
+              <p>© {new Date().getFullYear()} Centros Medicos Chile. Proyecto de código abierto y gratuito.</p>
+            </div>
           </div>
-          <p className="text-xs">
-            © {new Date().getFullYear()} SaludChile. Proyecto libre y gratuito.
-          </p>
         </div>
       </footer>
     </div>

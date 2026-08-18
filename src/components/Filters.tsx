@@ -36,12 +36,12 @@ export const Filters: React.FC<FiltersProps> = ({
     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-8 space-y-5">
       <div className="flex items-center justify-between border-b border-slate-100 pb-3">
         <div className="flex items-center gap-2 font-semibold text-slate-800">
-          <SlidersHorizontal className="h-4.5 w-4.5 text-blue-600" />
+          <SlidersHorizontal className="h-4.5 w-4.5 text-emerald-600" />
           <span>Filtros de Búsqueda</span>
         </div>
         <button
           onClick={onClearFilters}
-          className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-600 transition-colors font-medium cursor-pointer"
+          className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-emerald-600 transition-colors font-medium cursor-pointer"
         >
           <RefreshCw className="h-3 w-3" />
           Restablecer Filtros
@@ -59,7 +59,7 @@ export const Filters: React.FC<FiltersProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Ej: Hospital Clínico, Clínica Alemana..."
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
             />
           </div>
         </div>
@@ -73,7 +73,7 @@ export const Filters: React.FC<FiltersProps> = ({
               setSelectedRegion(e.target.value);
               setSelectedComuna(''); // Reset Comuna when Region changes
             }}
-            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer"
+            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all cursor-pointer"
           >
             <option value="">Todas las regiones</option>
             {Object.keys(REGIONES_COMUNAS).map((reg) => (
@@ -89,7 +89,7 @@ export const Filters: React.FC<FiltersProps> = ({
             value={selectedComuna}
             onChange={(e) => setSelectedComuna(e.target.value)}
             disabled={!selectedRegion}
-            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
           >
             <option value="">{selectedRegion ? 'Todas las comunas' : 'Selecciona una región'}</option>
             {comunasDisponibles.map((com) => (
@@ -123,7 +123,7 @@ export const Filters: React.FC<FiltersProps> = ({
               onClick={() => setSelectedTipo(tipo === 'Todos' ? '' : tipo)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-blue-600 border-blue-600 text-white shadow-sm shadow-blue-500/20'
+                  ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm shadow-emerald-500/20'
                   : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
               }`}
             >

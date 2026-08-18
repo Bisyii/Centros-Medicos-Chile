@@ -192,6 +192,175 @@ async function run() {
                 latitud: -33.5855,
                 longitud: -70.5482,
                 dependencia: "Corporación Municipal de Puente Alto"
+            },
+            {
+                id: "200008",
+                nombre: "IntegraMédica Huérfanos",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "Santiago",
+                direccion: "Huérfanos 1147",
+                telefono: "+56 2 2631 3000",
+                latitud: -33.4395,
+                longitud: -70.6542,
+                dependencia: "IntegraMédica Bupa"
+            },
+            {
+                id: "200009",
+                nombre: "IntegraMédica Alameda",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "Santiago",
+                direccion: "Av. Libertador Bernardo O'Higgins 654",
+                telefono: "+56 2 2631 3000",
+                latitud: -33.4442,
+                longitud: -70.6457,
+                dependencia: "IntegraMédica Bupa"
+            },
+            {
+                id: "200010",
+                nombre: "IntegraMédica Bandera",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "Santiago",
+                direccion: "Bandera 168",
+                telefono: "+56 2 2631 3000",
+                latitud: -33.4429,
+                longitud: -70.6515,
+                dependencia: "IntegraMédica Bupa"
+            },
+            {
+                id: "200011",
+                nombre: "IntegraMédica La Concepción",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "Providencia",
+                direccion: "La Concepción 206, Piso 1",
+                telefono: "+56 2 2631 3000",
+                latitud: -33.4243,
+                longitud: -70.6152,
+                dependencia: "IntegraMédica Bupa"
+            },
+            {
+                id: "200012",
+                nombre: "IntegraMédica Mall Plaza Vespucio",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "La Florida",
+                direccion: "Av. Vicuña Mackenna Oriente 7110, Local E-976",
+                telefono: "+56 2 2631 3000",
+                latitud: -33.5218,
+                longitud: -70.5982,
+                dependencia: "IntegraMédica Bupa"
+            },
+            {
+                id: "200013",
+                nombre: "Centro de Innovación en Salud Áncora San Francisco",
+                tipo: "Centro Médico",
+                categoria: "Público",
+                region: "Metropolitana de Santiago",
+                comuna: "Puente Alto",
+                direccion: "Av. Concha y Toro 3720",
+                telefono: "+56 2 2354 8000",
+                latitud: -33.5684,
+                longitud: -70.5752,
+                dependencia: "Red de Salud UC CHRISTUS"
+            },
+            {
+                id: "200014",
+                nombre: "Laboratorio CLINI - Tobalaba",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "Providencia",
+                direccion: "Luis Thayer Ojeda 085",
+                telefono: "+56 2 2783 7200",
+                latitud: -33.4184,
+                longitud: -70.6062,
+                dependencia: "Red CLINI"
+            },
+            {
+                id: "200015",
+                nombre: "Laboratorio CLINI - Moneda",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "Santiago",
+                direccion: "Av. Libertador Bernardo O'Higgins 1529",
+                telefono: "+56 2 2783 7200",
+                latitud: -33.4451,
+                longitud: -70.6575,
+                dependencia: "Red CLINI"
+            },
+            {
+                id: "200016",
+                nombre: "Laboratorio CLINI - Maipú",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "Maipú",
+                direccion: "Av. Pajaritos 2624, Local 32",
+                telefono: "+56 2 2783 7200",
+                latitud: -33.5097,
+                longitud: -70.7571,
+                dependencia: "Red CLINI"
+            },
+            {
+                id: "200017",
+                nombre: "Laboratorio CLINI - San Bernardo",
+                tipo: "Centro Médico",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "San Bernardo",
+                direccion: "Av. Libertador Bernardo O'Higgins 337",
+                telefono: "+56 2 2783 7200",
+                latitud: -33.5901,
+                longitud: -70.7052,
+                dependencia: "Red CLINI"
+            },
+            {
+                id: "200018",
+                nombre: "Clínica Bupa Santiago",
+                tipo: "Clínica",
+                categoria: "Privado",
+                region: "Metropolitana de Santiago",
+                comuna: "La Florida",
+                direccion: "Av. Departamental 1455",
+                telefono: "+56 2 2307 0000",
+                latitud: -33.5049,
+                longitud: -70.5791,
+                dependencia: "Bupa Chile"
+            },
+            {
+                id: "200019",
+                nombre: "Clínica Bupa Reñaca",
+                tipo: "Clínica",
+                categoria: "Privado",
+                region: "Valparaíso",
+                comuna: "Viña Del Mar",
+                direccion: "Calle Anabaena 336, Reñaca",
+                telefono: "+56 32 265 8000",
+                latitud: -32.9774,
+                longitud: -71.5362,
+                dependencia: "Bupa Chile"
+            },
+            {
+                id: "200020",
+                nombre: "Clínica Bupa Antofagasta",
+                tipo: "Clínica",
+                categoria: "Privado",
+                region: "Antofagasta",
+                comuna: "Antofagasta",
+                direccion: "Av. Manuel Antonio Matta 1945",
+                telefono: "+56 55 246 8000",
+                latitud: -23.6491,
+                longitud: -70.3984,
+                dependencia: "Bupa Chile"
             }
         ];
         
@@ -216,7 +385,7 @@ async function run() {
             
             // Evitar duplicar los agregados manualmente
             const nameLower = rawName.toLowerCase();
-            if (nameLower.includes("laurita") || nameLower.includes("alejandro del rio") || nameLower.includes("alejandro del río") || nameLower.includes("karol wojtyla") || nameLower.includes("sotero del rio") || nameLower.includes("sótero del río") || nameLower.includes("alemana de santiago") || nameLower.includes("clinica redsalud vitacura") || nameLower.includes("redsalud vitacura")) {
+            if (nameLower.includes("laurita") || nameLower.includes("clini") || nameLower.includes("bupa") || nameLower.includes("ancora") || nameLower.includes("áncora") || nameLower.includes("alejandro del rio") || nameLower.includes("alejandro del río") || nameLower.includes("karol wojtyla") || nameLower.includes("sotero del rio") || nameLower.includes("sótero del río") || nameLower.includes("alemana de santiago") || nameLower.includes("clinica redsalud vitacura") || nameLower.includes("redsalud vitacura")) {
                 continue;
             }
             
