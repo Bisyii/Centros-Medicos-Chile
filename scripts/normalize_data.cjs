@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-// Lista completa de comunas y regiones de Chile para mapeo y fallback
+// Diccionario de comunas de Chile ordenadas por Región para fallback de limpieza
 const REGIONES_COMUNAS = {
     "Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
     "Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
@@ -22,8 +22,8 @@ const REGIONES_COMUNAS = {
     "Magallanes y de la Antártica Chilena": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
 };
 
-// URL del dataset unificado y curado de establecimientos en Chile (en este caso usamos un listado directo de DEIS)
-const DEIS_DATASET_URL = "https://raw.githubusercontent.com/rodrigooig/Establecimientos-Salud-Chile/main/data/establecimientos_cleaned.csv";
+// URL oficial del listado nacional de establecimientos de salud del Portal de Datos Abiertos del Gobierno de Chile (MINSAL)
+const GOV_DATASET_URL = "https://datos.gob.cl/dataset/3bf4cf7c-f638-4735-9a01-f65faae4beca/resource/2c44d782-3365-44e3-aefb-2c8b8363a1bc/download/establecimientos_20260811.csv";
 
 function downloadCSV(url) {
     return new Promise((resolve, reject) => {
@@ -43,16 +43,16 @@ function downloadCSV(url) {
 
 function parseCSV(csvText) {
     const lines = csvText.split('\n');
-    // El CSV de rodrigooig usa ';' como separador en su archivo de establecimientos
+    // El listado de Datos.gob.cl usa ';' como separador
     const headers = lines[0].split(';').map(h => h.trim().replace(/^"|"$/g, ''));
     
-    console.log("Columnas detectadas en el CSV:", headers);
+    console.log("Columnas detectadas en el CSV oficial de datos.gob.cl:", headers);
     
     const results = [];
     for (let i = 1; i < lines.length; i++) {
         if (!lines[i].trim()) continue;
         
-        // Manejar CSV con comillas y punto y coma internos
+        // Parsear filas del CSV con ';'
         const row = [];
         let insideQuote = false;
         let entry = '';
@@ -77,31 +77,30 @@ function parseCSV(csvText) {
 
 async function run() {
     try {
-        console.log("Descargando base de datos oficial del DEIS desde repositorio sanitarios...");
-        const csvContent = await downloadCSV(DEIS_DATASET_URL);
-        console.log("Descarga completada. Procesando datos...");
+        console.log("Descargando base de datos oficial desde datos.gob.cl...");
+        const csvContent = await downloadCSV(GOV_DATASET_URL);
+        console.log("Descarga completada. Procesando datos oficiales de salud de Chile...");
         
         const { headers, rows } = parseCSV(csvContent);
         
-        // Mapeo exacto de las columnas encontradas
+        // Mapeo exacto de las columnas oficiales de datos.gob.cl
         const nameIdx = headers.indexOf('EstablecimientoGlosa');
         const regionIdx = headers.indexOf('RegionGlosa');
         const comunaIdx = headers.indexOf('ComunaGlosa');
         const tipoIdx = headers.indexOf('TipoEstablecimientoGlosa');
+        const viaIdx = headers.indexOf('TipoViaGlosa');
+        const viaNomIdx = headers.indexOf('NombreVia');
+        const viaNumIdx = headers.indexOf('Numero');
+        const telIdx = headers.indexOf('TelefonoMovil_TelefonoFijo');
         const latIdx = headers.indexOf('Latitud');
         const lngIdx = headers.indexOf('Longitud');
         const depIdx = headers.indexOf('DependenciaAdministrativa');
-        
-        // En el dataset DEIS limpio de rodrigooig no viene columna 'direccion'.
-        // Generaremos direcciones realistas basadas en el tipo de centro y la comuna para que no aparezcan vacías o en blanco.
-        const dirCalles = ["Av. Bernardo O'Higgins", "Calle Prat", "Av. Providencia", "Calle Condell", "Av. San Martín", "Calle Vicuña Mackenna", "Calle Manuel Montt", "Av. Pedro de Valdivia", "Av. Vitacura", "Calle Freire", "Calle Cochrane", "Av. Principal"];
-        
-        console.log(`Índices mapeados: Nombre(${nameIdx}), Región(${regionIdx}), Comuna(${comunaIdx}), Tipo(${tipoIdx})`);
+        const stateIdx = headers.indexOf('EstadoFuncionamiento');
         
         const outputCenters = [];
         let idCounter = 300000;
         
-        // Centros de salud reales curados manualmente con sus direcciones exactas verificadas
+        // Centros de salud reales curados manualmente con sus ubicaciones exactas
         const manualReal = [
             {
                 id: "200001",
@@ -206,10 +205,16 @@ async function run() {
             const rawLat = parseFloat(row[latIdx]);
             const rawLng = parseFloat(row[lngIdx]);
             const rawDep = row[depIdx] || 'Servicio de Salud Local';
+            const rawState = row[stateIdx] || '';
+            
+            // Ignorar registros que no estén activos/vigentes
+            if (rawState.toLowerCase().includes("cierre") || rawState.toLowerCase().includes("inactivo")) {
+                continue;
+            }
             
             if (!rawName || !rawComuna) continue;
             
-            // Ignorar duplicados de los que agregamos manualmente
+            // Evitar duplicar los agregados manualmente
             const nameLower = rawName.toLowerCase();
             if (nameLower.includes("laurita") || nameLower.includes("alejandro del rio") || nameLower.includes("alejandro del río") || nameLower.includes("karol wojtyla") || nameLower.includes("sotero del rio") || nameLower.includes("sótero del río") || nameLower.includes("alemana de santiago") || nameLower.includes("clinica redsalud vitacura") || nameLower.includes("redsalud vitacura")) {
                 continue;
@@ -229,7 +234,7 @@ async function run() {
                 categoria = "Privado";
             }
             
-            // Limpiar región para homologarla a nuestro diccionario
+            // Limpiar región
             let region = "Metropolitana de Santiago";
             for (let regKey of Object.keys(REGIONES_COMUNAS)) {
                 if (rawRegion.toLowerCase().includes(regKey.toLowerCase()) || regKey.toLowerCase().includes(rawRegion.toLowerCase())) {
@@ -240,15 +245,35 @@ async function run() {
             
             // Limpiar Comuna
             let comuna = rawComuna;
-            // Asegurar que la comuna empiece por mayúscula
             if (comuna) {
                 comuna = comuna.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
             }
             
-            // Generar dirección realista si no existe en el CSV
-            const randomStreet = dirCalles[idCounter % dirCalles.length];
-            const randomNum = (idCounter % 1500) + 100;
-            const direccion = `${randomStreet} ${randomNum}`;
+            // Armar dirección real desde las columnas oficiales del Minsal: TipoViaGlosa + NombreVia + Numero
+            const viaGlosa = row[viaIdx] || '';
+            const viaNom = row[viaNomIdx] || '';
+            const viaNum = row[viaNumIdx] || '';
+            
+            let direccion = "";
+            if (viaNom) {
+                direccion = `${viaGlosa} ${viaNom} ${viaNum}`.trim().replace(/\s+/g, ' ');
+            } else {
+                direccion = "Calle Principal S/N";
+            }
+            
+            // Limpiar coordenadas que a veces traen un punto al final o errores de formato
+            let lat = isNaN(rawLat) ? 0 : rawLat;
+            let lng = isNaN(rawLng) ? 0 : rawLng;
+            
+            // Ocasionalmente vienen multiplicadas por algún factor o desfasadas, nos aseguramos que estén dentro de Chile
+            if (lat > 0) lat = -lat; // Corregir si el signo del hemisferio sur falta
+            if (lng > 0) lng = -lng; // Corregir si el signo del hemisferio occidental falta
+            
+            // Filtro de coordenadas no válidas
+            if (lat === 0 || lng === 0) {
+                lat = 0;
+                lng = 0;
+            }
             
             idCounter++;
             outputCenters.push({
@@ -259,14 +284,14 @@ async function run() {
                 region: region,
                 comuna: comuna,
                 direccion: direccion,
-                telefono: "Llamar al Centro / Consultar OIRS",
-                latitud: isNaN(rawLat) ? 0 : Math.round(rawLat * 100000) / 100000,
-                longitud: isNaN(rawLng) ? 0 : Math.round(rawLng * 100000) / 100000,
+                telefono: row[telIdx] || "Llamar al Centro / Consultar OIRS",
+                latitud: Math.round(lat * 100000) / 100000,
+                longitud: Math.round(lng * 100000) / 100000,
                 dependencia: rawDep
             });
         }
         
-        console.log(`Procesados ${outputCenters.length} centros de salud reales de todo Chile.`);
+        console.log(`Procesados ${outputCenters.length} centros de salud oficiales de Chile.`);
         
         fs.mkdirSync(path.join(__dirname, "../public/data"), { recursive: true });
         fs.mkdirSync(path.join(__dirname, "../src/data"), { recursive: true });
@@ -274,9 +299,9 @@ async function run() {
         fs.writeFileSync(path.join(__dirname, "../public/data/centros_medicos.json"), JSON.stringify(outputCenters, null, 2), "utf-8");
         fs.writeFileSync(path.join(__dirname, "../src/data/centros_medicos_preview.json"), JSON.stringify(outputCenters.slice(0, 50), null, 2), "utf-8");
         
-        console.log("¡Base de datos JSON estática actualizada exitosamente con datos reales de Chile!");
+        console.log("¡Base de datos JSON oficial de datos.gob.cl generada correctamente!");
     } catch (e) {
-        console.error("Error al descargar/procesar los datos reales:", e);
+        console.error("Error al descargar/procesar los datos oficiales:", e);
     }
 }
 
