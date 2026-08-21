@@ -2,114 +2,461 @@ import urllib.request
 import json
 import os
 import re
+import csv
+import unicodedata
 
-# Urls de datasets públicos
-# Nota: Como las URLs directas a veces fallan o cambian, crearemos un dataset representativo completo de Chile
-# con comunas y regiones, y generaremos un pool de ~350 centros médicos bien distribuidos (públicos y privados)
-# simulados de forma hiper-realista a partir de comunas reales chilenas, garantizando un JSON que funcione perfectamente offline.
+GOV_DATASET_URL = "https://datos.gob.cl/dataset/3bf4cf7c-f638-4735-9a01-f65faae4beca/resource/2c44d782-3365-44e3-aefb-2c8b8363a1bc/download/establecimientos_20260811.csv"
 
-REGIONES_COMUNAS = {
-    "Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
-    "Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
-    "Antofagasta": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "Tocopilla", "María Elena"],
-    "Atacama": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"],
-    "Coquimbo": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"],
-    "Valparaíso": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"],
-    "Metropolitana de Santiago": ["Santiago", "Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor", "Colina", "Lampa", "Tiltil"],
-    "Libertador General Bernardo O'Higgins": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchihue", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"],
-    "Maule": ["Talca", "Constitución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "Retiro", "San Javier", "Villa Alegre", "Yerbas Buenas"],
-    "Ñuble": ["Chillán", "Bulnes", "Cobquecura", "Coelemu", "Coihueco", "Chillán Viejo", "El Carmen", "Ninhue", "Ñiquén", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay"],
-    "Biobío": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualpén", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío"],
-    "La Araucanía": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre Las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria"],
-    "Los Ríos": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"],
-    "Los Lagos": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "Frutillar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"],
-    "Aysén del General Carlos Ibáñez del Campo": ["Coyhaique", "Lago Verde", "Aysén", "Cisnes", "Guaitecas", "Cochrane", "O'Higgins", "Tortel", "Chile Chico", "Río Ibáñez"],
-    "Magallanes y de la Antártica Chilena": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
-}
+def normalize_text(text):
+    if not text:
+        return ""
+    text = text.strip().lower()
+    text = ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
+    return text
 
-TIPOS_ESTABLECIMIENTOS = [
-    {"tipo": "CESFAM", "categoria": "Público", "nombres": ["CESFAM Cardenal Silva Henríquez", "CESFAM Salvador Allende", "CESFAM Dr. Alberto Bachelet", "CESFAM Juan Pablo II", "CESFAM Sor Teresa"]},
-    {"tipo": "Hospital", "categoria": "Público", "nombres": ["Hospital Clínico Regional", "Hospital Dr. Sótero del Río", "Hospital de Apoyo Provincial", "Hospital de Urgencia Asistencia Pública (Posta Central)", "Hospital San Juan de Dios"]},
-    {"tipo": "SAPU / SAR", "categoria": "Público", "nombres": ["SAR Oriente", "SAPU Central", "SAR Dr. Juan Carlos Baeza", "SAPU Bellavista"]},
-    {"tipo": "Clínica", "categoria": "Privado", "nombres": ["Clínica Alemana", "Clínica RedSalud", "Clínica Bupa", "Clínica Santa María", "Clínica Dávila", "Clínica Indisa"]},
-    {"tipo": "Centro Médico", "categoria": "Privado", "nombres": ["Centro Médico Integramedica", "MegaSalud", "Centro Médico Los Andes", "Centro de Salud San Lorenzo", "Consulta Médica Particular"]}
-]
-
-DIRECCIONES_TIPO = [
-    "Av. Bernardo O'Higgins", "Calle Prat", "Av. Providencia", "Calle Condell", "Av. San Martín",
-    "Calle Vicuña Mackenna", "Calle Manuel Montt", "Av. Pedro de Valdivia", "Av. Vitacura",
-    "Calle Picarte", "Av. Alemania", "Av. Gabriela Mistral", "Calle Freire", "Calle Cochrane"
-]
-
-def generate_medical_centers():
-    centers = []
-    id_counter = 100001
+def run():
+    print("Cargando regiones_comunas_chile.json...")
+    with open("regiones_comunas_chile.json", "r", encoding="utf-8") as f:
+        config = json.load(f)
+        
+    regiones_list = config["regiones"]
     
-    # Creamos por lo menos un centro para cada comuna, garantizando que el filtro siempre tenga resultados
-    for region, comunas in REGIONES_COMUNAS.items():
-        for comuna in comunas:
-            # Determinamos cuántos centros crear en la comuna (ciudades más grandes tienen más)
-            num_centers = 1
-            if comuna in ["Santiago", "Las Condes", "Providencia", "Viña del Mar", "Concepción", "Temuco", "Antofagasta", "La Serena", "Puerto Montt", "Puente Alto", "Maipú"]:
-                num_centers = 4
+    # Pre-calcular normalizaciones
+    norm_regions = {normalize_text(r["region"]): r["region"] for r in regiones_list}
+    
+    def find_best_match(raw_region, raw_comuna):
+        raw_r_norm = normalize_text(raw_region)
+        raw_c_norm = normalize_text(raw_comuna)
+        
+        # Buscar región
+        matched_region = None
+        for r_norm, r_name in norm_regions.items():
+            if r_norm in raw_r_norm or raw_r_norm in r_norm:
+                matched_region = r_name
+                break
+        
+        if not matched_region:
+            matched_region = "Región Metropolitana de Santiago"
             
-            for i in range(num_centers):
-                # Rotación de tipos de establecimiento
-                tipo_data = TIPOS_ESTABLECIMIENTOS[(id_counter + i) % len(TIPOS_ESTABLECIMIENTOS)]
-                
-                # Nombre del centro médico
-                nombre_base = tipo_data["nombres"][(id_counter + i) % len(tipo_data["nombres"])]
-                nombre_completo = f"{nombre_base} de {comuna}" if "Clínica" not in nombre_base else f"{nombre_base} Sucursal {comuna}"
-                
-                # Dirección y Teléfono
-                dir_nombre = DIRECCIONES_TIPO[(id_counter + i) % len(DIRECCIONES_TIPO)]
-                numero = (id_counter % 2000) + 100
-                direccion = f"{dir_nombre} {numero}"
-                
-                # Código telefónico regional
-                telefono = f"+56 {2 if region == 'Metropolitana de Santiago' else 41 if region == 'Biobío' else 32 if region == 'Valparaíso' else 9} {id_counter + 3421}"
-                
-                # Lat y Lng base de Chile según región
-                lat_base = -33.45 if region == "Metropolitana de Santiago" else -36.82 if region == "Biobío" else -33.04 if region == "Valparaíso" else -41.46 if region == "Los Lagos" else -23.65 if region == "Antofagasta" else -29.90
-                # Añadir pequeña desviación aleatoria por centro
-                lat = lat_base + (id_counter % 100) * 0.001 - 0.05
-                lng = -70.66 + (id_counter % 100) * 0.001 - 0.05 if region == "Metropolitana de Santiago" else -73.04 + (id_counter % 100) * 0.001 - 0.05
-                
-                centers.append({
-                    "id": str(id_counter),
-                    "nombre": nombre_completo,
-                    "tipo": tipo_data["tipo"],
-                    "categoria": tipo_data["categoria"],
-                    "region": region,
-                    "comuna": comuna,
-                    "direccion": direccion,
-                    "telefono": telefono,
-                    "latitud": round(lat, 5),
-                    "longitud": round(lng, 5),
-                    "dependencia": f"Servicio de Salud {region}" if tipo_data["categoria"] == "Público" else "Administración Privada"
-                })
-                
-                id_counter += 1
-                
-    return centers
+        # Buscar comuna en la región
+        r_obj = next((r for r in regiones_list if r["region"] == matched_region), None)
+        if r_obj:
+            for c_name in r_obj["comunas"]:
+                c_norm = normalize_text(c_name)
+                if c_norm == raw_c_norm or c_norm in raw_c_norm or raw_c_norm in c_norm:
+                    return matched_region, c_name
+                    
+        # Buscar comuna en cualquier región
+        for r in regiones_list:
+            for c_name in r["comunas"]:
+                c_norm = normalize_text(c_name)
+                if c_norm == raw_c_norm:
+                    return r["region"], c_name
+                    
+        return matched_region, raw_comuna.title()
 
-if __name__ == "__main__":
-    print("Generando base de datos de centros médicos de Chile...")
-    data = generate_medical_centers()
+    print("Descargando base de datos oficial desde datos.gob.cl...")
+    req = urllib.request.Request(
+        GOV_DATASET_URL, 
+        headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+    )
     
-    # Crear directorio si no existe
+    try:
+        with urllib.request.urlopen(req) as response:
+            csv_content = response.read().decode('utf-8', errors='ignore')
+    except Exception as e:
+        print(f"Error al descargar los datos: {e}")
+        return
+
+    print("Descarga completada. Procesando datos oficiales de salud de Chile...")
+    
+    lines = csv_content.splitlines()
+    if not lines:
+        print("El archivo CSV está vacío.")
+        return
+        
+    reader = csv.reader(lines, delimiter=';')
+    headers = next(reader)
+    
+    try:
+        name_idx = headers.index('EstablecimientoGlosa')
+        region_idx = headers.index('RegionGlosa')
+        comuna_idx = headers.index('ComunaGlosa')
+        tipo_idx = headers.index('TipoEstablecimientoGlosa')
+        via_idx = headers.index('TipoViaGlosa')
+        via_nom_idx = headers.index('NombreVia')
+        via_num_idx = headers.index('Numero')
+        tel_idx = headers.index('TelefonoMovil_TelefonoFijo')
+        lat_idx = headers.index('Latitud')
+        lng_idx = headers.index('Longitud')
+        dep_idx = headers.index('DependenciaAdministrativa')
+        state_idx = headers.index('EstadoFuncionamiento')
+    except ValueError as e:
+        print(f"Error de columnas en el CSV: {e}")
+        return
+
+    output_centers = []
+    id_counter = 300000
+
+    # Agregar clínicas y centros manuales conocidos
+    manual_real = [
+        {
+            "id": "200001",
+            "nombre": "CESFAM Laurita Vicuña",
+            "tipo": "CESFAM",
+            "categoria": "Público",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Puente Alto",
+            "direccion": "Av. Ejército Libertador 2433",
+            "telefono": "+56 2 2485 4610",
+            "latitud": -33.6268,
+            "longitud: -70.5985",
+            "dependencia": "Corporación Municipal de Puente Alto"
+        },
+        {
+            "id": "200002",
+            "nombre": "Hospital Dr. Sótero del Río",
+            "tipo": "Hospital",
+            "categoria": "Público",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Puente Alto",
+            "direccion": "Av. Concha y Toro 3459",
+            "telefono": "+56 2 2576 0000",
+            "latitud": -33.5794,
+            "longitud": -70.5795,
+            "dependencia": "Servicio de Salud Metropolitano Sur Oriente"
+        },
+        {
+            "id": "200003",
+            "nombre": "Clínica Alemana de Santiago (Vitacura)",
+            "tipo": "Clínica",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Vitacura",
+            "direccion": "Av. Vitacura 5951",
+            "telefono": "+56 2 2210 1111",
+            "latitud": -33.3986,
+            "longitud": -70.5739,
+            "dependencia": "Administración Privada"
+        },
+        {
+            "id": "200004",
+            "nombre": "Hospital Clínico de la Pontificia Universidad Católica",
+            "tipo": "Hospital",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Santiago",
+            "direccion": "Av. Marcoleta 367",
+            "telefono": "+56 2 2354 3000",
+            "latitud": -33.4415,
+            "longitud": -70.6409,
+            "dependencia": "Red de Salud UC CHRISTUS"
+        },
+        {
+            "id": "200005",
+            "nombre": "CESFAM Dr. Alejandro del Río",
+            "tipo": "CESFAM",
+            "categoria": "Público",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Puente Alto",
+            "direccion": "Calle Gandarillas 111",
+            "telefono": "+56 2 2485 4100",
+            "latitud": -33.6167,
+            "longitud": -70.5798,
+            "dependencia": "Corporación Municipal de Puente Alto"
+        },
+        {
+            "id": "200006",
+            "nombre": "Clínica RedSalud Vitacura",
+            "tipo": "Clínica",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Vitacura",
+            "direccion": "Tabancura 1185",
+            "telefono": "+56 2 2240 3000",
+            "latitud": -33.3768,
+            "longitud": -70.5367,
+            "dependencia": "Administración Privada"
+        },
+        {
+            "id": "200007",
+            "nombre": "CESFAM Karol Wojtyla",
+            "tipo": "CESFAM",
+            "categoria": "Público",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Puente Alto",
+            "direccion": "Av. Curaco de Vélez 4110",
+            "telefono": "+56 2 2485 4800",
+            "latitud": -33.5855,
+            "longitud": -70.5482,
+            "dependencia": "Corporación Municipal de Puente Alto"
+        },
+        {
+            "id": "200008",
+            "nombre": "IntegraMédica Huérfanos",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Santiago",
+            "direccion": "Huérfanos 1147",
+            "telefono": "+56 2 2631 3000",
+            "latitud": -33.4395,
+            "longitud": -70.6542,
+            "dependencia": "IntegraMédica Bupa"
+        },
+        {
+            "id": "200009",
+            "nombre": "IntegraMédica Alameda",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Santiago",
+            "direccion": "Av. Libertador Bernardo O'Higgins 654",
+            "telefono": "+56 2 2631 3000",
+            "latitud": -33.4442,
+            "longitud": -70.6457,
+            "dependencia": "IntegraMédica Bupa"
+        },
+        {
+            "id": "200010",
+            "nombre": "IntegraMédica Bandera",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Santiago",
+            "direccion": "Bandera 168",
+            "telefono": "+56 2 2631 3000",
+            "latitud": -33.4429,
+            "longitud": -70.6515,
+            "dependencia": "IntegraMédica Bupa"
+        },
+        {
+            "id": "200011",
+            "nombre": "IntegraMédica La Concepción",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Providencia",
+            "direccion": "La Concepción 206, Piso 1",
+            "telefono": "+56 2 2631 3000",
+            "latitud": -33.4243,
+            "longitud": -70.6152,
+            "dependencia": "IntegraMédica Bupa"
+        },
+        {
+            "id": "200012",
+            "nombre": "IntegraMédica Mall Plaza Vespucio",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "La Florida",
+            "direccion": "Av. Vicuña Mackenna Oriente 7110, Local E-976",
+            "telefono": "+56 2 2631 3000",
+            "latitud": -33.5218,
+            "longitud": -70.5982,
+            "dependencia": "IntegraMédica Bupa"
+        },
+        {
+            "id": "200013",
+            "nombre": "Centro de Innovación en Salud Áncora San Francisco",
+            "tipo": "Centro Médico",
+            "categoria": "Público",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Puente Alto",
+            "direccion": "Av. Concha y Toro 3720",
+            "telefono": "+56 2 2354 8000",
+            "latitud": -33.5684,
+            "longitud": -70.5752,
+            "dependencia": "Red de Salud UC CHRISTUS"
+        },
+        {
+            "id": "200014",
+            "nombre": "Laboratorio CLINI - Tobalaba",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Providencia",
+            "direccion": "Luis Thayer Ojeda 085",
+            "telefono": "+56 2 2783 7200",
+            "latitud": -33.4184,
+            "longitud": -70.6062,
+            "dependencia": "Red CLINI"
+        },
+        {
+            "id": "200015",
+            "nombre": "Laboratorio CLINI - Moneda",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Santiago",
+            "direccion": "Av. Libertador Bernardo O'Higgins 1529",
+            "telefono": "+56 2 2783 7200",
+            "latitud": -33.4451,
+            "longitud": -70.6575,
+            "dependencia": "Red CLINI"
+        },
+        {
+            "id": "200016",
+            "nombre": "Laboratorio CLINI - Maipú",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "Maipú",
+            "direccion": "Av. Pajaritos 2624, Local 32",
+            "telefono": "+56 2 2783 7200",
+            "latitud": -33.5097,
+            "longitud": -70.7571,
+            "dependencia": "Red CLINI"
+        },
+        {
+            "id": "200017",
+            "nombre": "Laboratorio CLINI - San Bernardo",
+            "tipo": "Centro Médico",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "San Bernardo",
+            "direccion": "Av. Libertador Bernardo O'Higgins 337",
+            "telefono": "+56 2 2783 7200",
+            "latitud": -33.5901,
+            "longitud": -70.7052,
+            "dependencia": "Red CLINI"
+        },
+        {
+            "id": "200018",
+            "nombre": "Clínica Bupa Santiago",
+            "tipo": "Clínica",
+            "categoria": "Privado",
+            "region": "Región Metropolitana de Santiago",
+            "comuna": "La Florida",
+            "direccion": "Av. Departamental 1455",
+            "telefono": "+56 2 2307 0000",
+            "latitud": -33.5049,
+            "longitud": -70.5791,
+            "dependencia": "Bupa Chile"
+        },
+        {
+            "id": "200019",
+            "nombre": "Clínica Bupa Reñaca",
+            "tipo": "Clínica",
+            "categoria": "Privado",
+            "region": "Región de Valparaíso",
+            "comuna": "Viña Del Mar",
+            "direccion": "Calle Anabaena 336, Reñaca",
+            "telefono": "+56 32 265 8000",
+            "latitud": -32.9774,
+            "longitud": -71.5362,
+            "dependencia": "Bupa Chile"
+        },
+        {
+            "id": "200020",
+            "nombre": "Clínica Bupa Antofagasta",
+            "tipo": "Clínica",
+            "categoria": "Privado",
+            "region": "Región de Antofagasta",
+            "comuna": "Antofagasta",
+            "direccion": "Av. Manuel Antonio Matta 1945",
+            "telefono": "+56 55 246 8000",
+            "latitud": -23.6491,
+            "longitud": -70.3984,
+            "dependencia": "Bupa Chile"
+        }
+    ]
+
+    output_centers.extend(manual_real)
+    
+    for row in reader:
+        if len(row) <= max(name_idx, region_idx, comuna_idx):
+            continue
+            
+        raw_name = row[name_idx]
+        raw_comuna = row[comuna_idx]
+        raw_region = row[region_idx]
+        raw_tipo = row[tipo_idx] if row[tipo_idx] else 'Otro'
+        raw_dep = row[dep_idx] if row[dep_idx] else 'Servicio de Salud Local'
+        raw_state = row[state_idx] if row[state_idx] else ''
+        
+        # Ignorar inactivos
+        if "cierre" in raw_state.lower() or "inactivo" in raw_state.lower():
+            continue
+            
+        if not raw_name or not raw_comuna:
+            continue
+            
+        name_lower = raw_name.lower()
+        # Evitar duplicar los manuales
+        if any(keyword in name_lower for keyword in ["laurita", "clini", "bupa", "ancora", "áncora", "alejandro del rio", "alejandro del río", "karol wojtyla", "sotero del rio", "sótero del río", "alemana de santiago", "clinica redsalud vitacura", "redsalud vitacura"]):
+            continue
+            
+        # Homologar Tipo
+        tipo = "Otro"
+        if "cesfam" in raw_tipo.lower() or "cesfam" in name_lower:
+            tipo = "CESFAM"
+        elif "hospital" in raw_tipo.lower() or "hospital" in name_lower:
+            tipo = "Hospital"
+        elif "sapu" in raw_tipo.lower() or "sar" in raw_tipo.lower() or "sapu" in name_lower or "sar" in name_lower:
+            tipo = "SAPU / SAR"
+        elif "clínica" in raw_tipo.lower() or "clinica" in name_lower:
+            tipo = "Clínica"
+        elif "centro médico" in raw_tipo.lower() or "consultorio" in raw_tipo.lower() or "centro medico" in name_lower or "consultorio" in name_lower:
+            tipo = "Centro Médico"
+            
+        # Determinar Categoría
+        categoria = "Público"
+        if tipo == "Clínica" or "privado" in raw_dep.lower() or any(k in name_lower for k in ["alemana", "redsalud", "bupa", "integramedica"]):
+            categoria = "Privado"
+            
+        # Mapear región y comuna con regiones_comunas_chile.json
+        region, comuna = find_best_match(raw_region, raw_comuna)
+        
+        # Armar dirección
+        via_glosa = row[via_idx] if row[via_idx] else ''
+        via_nom = row[via_nom_idx] if row[via_nom_idx] else ''
+        via_num = row[via_num_idx] if row[via_num_idx] else ''
+        
+        direccion = "Calle Principal S/N"
+        if via_nom:
+            direccion = f"{via_glosa} {via_nom} {via_num}".strip()
+            direccion = re.sub(r'\s+', ' ', direccion)
+            
+        # Limpiar coordenadas
+        try:
+            lat = float(row[lat_idx]) if row[lat_idx] else 0.0
+            lng = float(row[lng_idx]) if row[lng_idx] else 0.0
+        except ValueError:
+            lat, lng = 0.0, 0.0
+            
+        if lat > 0:
+            lat = -lat
+        if lng > 0:
+            lng = -lng
+            
+        id_counter += 1
+        output_centers.append({
+            "id": str(id_counter),
+            "nombre": raw_name,
+            "tipo": tipo,
+            "categoria": categoria,
+            "region": region,
+            "comuna": comuna,
+            "direccion": direccion,
+            "telefono": row[tel_idx] if row[tel_idx] else "Llamar al Centro / Consultar OIRS",
+            "latitud": round(lat, 5),
+            "longitud": round(lng, 5),
+            "dependencia": raw_dep
+        })
+        
+    print(f"Procesados {len(output_centers)} centros de salud oficiales de Chile mapeados con regiones_comunas_chile.json.")
+    
     os.makedirs("public/data", exist_ok=True)
     os.makedirs("src/data", exist_ok=True)
     
-    # Guardar en public/data/centros_medicos.json
-    output_path = "public/data/centros_medicos.json"
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    with open("public/data/centros_medicos.json", "w", encoding="utf-8") as f:
+        json.dump(output_centers, f, ensure_ascii=False, indent=2)
         
-    # Guardar un preview pequeño para el src de desarrollo rápido
-    preview_path = "src/data/centros_medicos_preview.json"
-    with open(preview_path, "w", encoding="utf-8") as f:
-        json.dump(data[:50], f, ensure_ascii=False, indent=2)
+    with open("src/data/centros_medicos_preview.json", "w", encoding="utf-8") as f:
+        json.dump(output_centers[:50], f, ensure_ascii=False, indent=2)
         
-    print(f"Generados {len(data)} centros médicos de Chile.")
-    print(f"Guardados en {output_path} y preview en {preview_path}")
+    print("¡Proceso completado de forma exitosa!")
+
+if __name__ == "__main__":
+    run()

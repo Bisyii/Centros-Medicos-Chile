@@ -36,12 +36,12 @@ export const Filters: React.FC<FiltersProps> = ({
     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-8 space-y-5">
       <div className="flex items-center justify-between border-b border-slate-100 pb-3">
         <div className="flex items-center gap-2 font-semibold text-slate-800">
-          <SlidersHorizontal className="h-4.5 w-4.5 text-emerald-600" />
+          <SlidersHorizontal className="h-4.5 w-4.5 text-rose-600" />
           <span>Filtros de Búsqueda</span>
         </div>
         <button
           onClick={onClearFilters}
-          className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-emerald-600 transition-colors font-medium cursor-pointer"
+          className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-rose-600 transition-colors font-medium cursor-pointer"
         >
           <RefreshCw className="h-3 w-3" />
           Restablecer Filtros
@@ -59,7 +59,7 @@ export const Filters: React.FC<FiltersProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Ej: Hospital Clínico, Clínica Alemana..."
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all"
             />
           </div>
         </div>
@@ -115,7 +115,7 @@ export const Filters: React.FC<FiltersProps> = ({
 
       <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-50">
         <span className="text-xs font-semibold text-slate-400 mr-2 self-center uppercase tracking-wider">Tipo Establecimiento:</span>
-        {['Todos', 'CESFAM', 'Hospital', 'SAPU / SAR', 'Clínica', 'Centro Médico'].map((tipo) => {
+        {['Todos', 'CESFAM', 'CECOSF', 'Posta de Salud Rural (PSR)', 'Estación Médico Rural (EMR)', 'SAPU', 'SAR', 'SUR', 'Hospital', 'COSAM', 'CAE / CDT', 'Clínica', 'Centro Médico', 'Centro de Salud Laboral', 'Otro'].map((tipo) => {
           const isSelected = selectedTipo === (tipo === 'Todos' ? '' : tipo);
           return (
             <button
@@ -123,7 +123,7 @@ export const Filters: React.FC<FiltersProps> = ({
               onClick={() => setSelectedTipo(tipo === 'Todos' ? '' : tipo)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm shadow-emerald-500/20'
+                  ? 'bg-rose-600 border-rose-600 text-white shadow-sm shadow-rose-500/20'
                   : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
               }`}
             >

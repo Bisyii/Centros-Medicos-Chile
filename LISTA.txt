@@ -1,0 +1,37 @@
+1. Atención Primaria de Salud (APS - Red Pública)
+Están centrados en la prevención, promoción y resolución de problemas básicos de salud.
+
+CESFAM (Centro de Salud Familiar): Atención ambulatoria de modelo integral y familiar.
+
+CECOSF (Centro Comunitario de Salud Familiar): Extensión de un CESFAM para acercar la salud a sectores específicos.
+
+Postas de Salud Rural (PSR): Primer punto de contacto en sectores rurales, atendidas por técnicos paramédicos.
+
+Estación Médico Rural (EMR): Centros básicos para rondas periódicas de equipos de salud.
+
+2. Red de Urgencia (Red Pública)
+Dispositivos diseñados para la atención de urgencias de baja y mediana complejidad.
+
+SAPU (Servicio de Atención Primaria de Urgencia): Urgencia de baja complejidad con horario extendido.
+
+SAR (Servicio de Atención Primaria de Urgencia de Alta Resolutividad): Atención 24/7 o extendida con apoyo de rayos X y laboratorio.
+
+SUR (Servicio de Urgencia Rural): Urgencias en zonas rurales para complementar la red hospitalaria.
+
+3. Atención Secundaria y Terciaria (Red Pública)
+Enfocados en especialidades, hospitalización y diagnósticos avanzados.
+
+Hospitales (Alta, Mediana y Baja complejidad): Desde el Tipo 1 (alta complejidad) hasta el Tipo 4 (baja complejidad).
+
+COSAM (Centro Comunitario de Salud Mental): Especializados en el tratamiento ambulatorio de salud mental.
+
+CAE / CDT (Centros de Especialidades): Centros dedicados a consultas de especialistas y procedimientos complejos.
+
+4. Sector Privado
+Establecimientos que funcionan bajo lógica de financiamiento privado.
+
+Clínicas: Centros de alta complejidad con capacidad de hospitalización, UCI, pabellones quirúrgicos y urgencias 24/7.
+
+Centros Médicos: (Ejemplo: IntegraMédica). Recintos enfocados en consultas de especialistas, toma de muestras, imagenología y procedimientos que no requieren hospitalización.
+
+Centros de Salud Laboral: (Ejemplo: Mutual de Seguridad). Especializados en traumatología y patologías derivadas de accidentes del trabajo.

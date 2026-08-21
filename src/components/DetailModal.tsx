@@ -33,8 +33,8 @@ export const DetailModal: React.FC<DetailModalProps> = ({ centro, onClose }) => 
           <div>
             <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tracking-wide border mb-2 ${
               centro.categoria === 'Público' 
-                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
-                : 'bg-blue-50 text-blue-700 border border-blue-200'
+                ? 'bg-rose-50 text-rose-700 border border-rose-200' 
+                : 'bg-rose-100/50 text-rose-800 border border-rose-300/40'
             }`}>
               {centro.categoria} • {centro.tipo}
             </span>
@@ -57,7 +57,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ centro, onClose }) => 
 
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <MapPin className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+              <MapPin className="h-5 w-5 text-rose-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Dirección</p>
                 <p className="text-slate-700 font-medium">{centro.direccion}</p>
@@ -66,17 +66,17 @@ export const DetailModal: React.FC<DetailModalProps> = ({ centro, onClose }) => 
             </div>
 
             <div className="flex items-start gap-3">
-              <Phone className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+              <Phone className="h-5 w-5 text-rose-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Contacto</p>
-                <a href={`tel:${centro.telefono}`} className="text-blue-600 font-medium hover:underline">
+                <a href={`tel:${centro.telefono}`} className="text-rose-600 font-medium hover:underline">
                   {centro.telefono}
                 </a>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <Building className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+              <Building className="h-5 w-5 text-rose-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Dependencia Administrativa</p>
                 <p className="text-slate-700 font-medium">{centro.dependencia}</p>
@@ -84,7 +84,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ centro, onClose }) => 
             </div>
 
             <div className="flex items-start gap-3">
-              <Calendar className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+              <Calendar className="h-5 w-5 text-rose-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Horario de Atención</p>
                 <p className="text-slate-700 text-sm">Lunes a Viernes: 08:00 - 20:00 hrs</p>
@@ -100,7 +100,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({ centro, onClose }) => 
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-4 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all text-sm cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-2 bg-rose-600 hover:bg-rose-700 text-white py-2.5 px-4 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all text-sm cursor-pointer"
           >
             <ExternalLink className="h-4 w-4" />
             Cómo Llegar (Google Maps)

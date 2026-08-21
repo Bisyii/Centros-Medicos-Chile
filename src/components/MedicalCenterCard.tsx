@@ -13,20 +13,20 @@ export const MedicalCenterCard: React.FC<MedicalCenterCardProps> = ({ centro, on
   return (
     <div 
       onClick={() => onSelect(centro)}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md cursor-pointer"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-rose-300 hover:shadow-md cursor-pointer"
     >
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
           <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tracking-wide transition-colors ${
             isPublico 
-              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
-              : 'bg-emerald-100/50 text-emerald-800 border border-emerald-300/40'
+              ? 'bg-rose-50 text-rose-700 border border-rose-200' 
+              : 'bg-rose-100/50 text-rose-800 border border-rose-300/40'
           }`}>
             {centro.categoria} • {centro.tipo}
           </span>
         </div>
 
-        <h3 className="text-lg font-bold text-slate-800 line-clamp-2 group-hover:text-emerald-600 transition-colors mb-4">
+        <h3 className="text-lg font-bold text-slate-800 line-clamp-2 group-hover:text-rose-600 transition-colors mb-4">
           {centro.nombre}
         </h3>
 
@@ -50,7 +50,7 @@ export const MedicalCenterCard: React.FC<MedicalCenterCardProps> = ({ centro, on
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-end text-xs font-semibold text-emerald-600 group-hover:underline pt-2">
+      <div className="mt-4 flex items-center justify-end text-xs font-semibold text-rose-600 group-hover:underline pt-2">
         Ver Detalles e Indicaciones
         <ExternalLink className="ml-1 h-3.5 w-3.5" />
       </div>

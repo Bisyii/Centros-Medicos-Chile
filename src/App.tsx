@@ -142,15 +142,6 @@ export default function App() {
             Volver al Inicio
           </button>
         </div>
-        
-        {/* Banner de Prueba - Google AdSense (Simulación en Entorno de Prueba) */}
-        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
-          <div className="flex items-center gap-2">
-            <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-300 uppercase tracking-wider">Anuncio de Prueba</span>
-            <p className="text-xs text-slate-600 font-medium">Espacio publicitario reservado para Google AdSense (Banner Horizontal Responsivo)</p>
-          </div>
-          <span className="text-[10px] text-slate-400 font-mono">Format: auto | Slot: 98319204</span>
-        </div>
 
         {/* Filtros */}
         <Filters
@@ -170,7 +161,7 @@ export default function App() {
         {/* Carga o Errores */}
         {loading && (
           <div className="py-20 text-center space-y-4">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-emerald-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" />
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-rose-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" />
             <p className="text-slate-500 font-medium">Cargando centros de salud del país...</p>
           </div>
         )}
@@ -192,7 +183,7 @@ export default function App() {
               {filteredCentros.length === 0 && (
                 <button
                   onClick={handleClearFilters}
-                  className="text-sm text-emerald-600 font-semibold hover:underline"
+                  className="text-sm text-rose-600 font-semibold hover:underline"
                 >
                   Limpiar filtros para ver todo
                 </button>
@@ -214,7 +205,7 @@ export default function App() {
                 {/* Elemento de trigger del Infinite Scroll */}
                 {visibleCount < filteredCentros.length && (
                   <div ref={observerRef} className="py-10 text-center flex justify-center">
-                    <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-emerald-600 border-r-transparent" />
+                    <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-rose-600 border-r-transparent" />
                     <span className="ml-2 text-slate-500 text-sm font-semibold">Cargando más centros...</span>
                   </div>
                 )}
@@ -244,12 +235,12 @@ export default function App() {
           {/* Fusión de Header en el Footer */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-800 pb-8">
             <div className="flex items-center gap-3">
-              <div className="bg-emerald-600/20 p-2.5 rounded-2xl text-emerald-500">
-                <Heart className="h-7 w-7 fill-emerald-500/10" />
+              <div className="bg-rose-600/20 p-2.5 rounded-2xl text-rose-500">
+                <Heart className="h-7 w-7 fill-rose-500/10" />
               </div>
               <div>
                 <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-                  Centros Medicos Chile <span className="text-xs bg-slate-800 text-emerald-400 font-bold px-2 py-0.5 rounded-md border border-slate-700">BETA</span>
+                  Centros Medicos Chile <span className="text-xs bg-slate-800 text-rose-400 font-bold px-2 py-0.5 rounded-md border border-slate-700">BETA</span>
                 </h2>
                 <p className="text-slate-400 text-xs mt-0.5">Buscador y directorio oficial de centros de salud de Chile</p>
               </div>
@@ -258,12 +249,12 @@ export default function App() {
             {/* Widget de base de datos trasladado */}
             <div className="flex items-center gap-4 text-xs text-slate-300 bg-slate-800/40 border border-slate-800/80 px-4 py-2 rounded-xl">
               <div className="flex items-center gap-1.5">
-                <Database className="h-3.5 w-3.5 text-emerald-500" />
+                <Database className="h-3.5 w-3.5 text-rose-500" />
                 <span><strong className="text-white">{centros.length}</strong> Establecimientos</span>
               </div>
               <div className="h-3 w-px bg-slate-700" />
               <div className="flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-emerald-500" />
+                <MapPin className="h-3.5 w-3.5 text-rose-500" />
                 <span>Todas las comunas</span>
               </div>
             </div>
@@ -277,7 +268,7 @@ export default function App() {
                 <span>Datos extraídos de fuentes públicas del Ministerio de Salud y DEIS de Chile.</span>
               </div>
               <div className="flex items-center gap-1.5 text-slate-500">
-                <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                <ShieldCheck className="h-3.5 w-3.5 text-rose-500 shrink-0" />
                 <span>Plataforma 100% gratuita y colaborativa de salud chilena.</span>
               </div>
             </div>
