@@ -110,7 +110,7 @@ def run():
             "direccion": "Av. Ejército Libertador 2433",
             "telefono": "+56 2 2485 4610",
             "latitud": -33.6268,
-            "longitud: -70.5985",
+            "longitud": -70.5985,
             "dependencia": "Corporación Municipal de Puente Alto"
         },
         {

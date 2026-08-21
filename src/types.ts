@@ -10,6 +10,20 @@ export interface CentroMedico {
   latitud: number;
   longitud: number;
   dependencia: string;
+  activo?: boolean;
+  verificacion_google?: {
+    estado_funcionamiento: string;
+    place_id?: string;
+    fecha_verificacion: string;
+    direccion_google?: string;
+  };
+  verificacion_sis?: {
+    registrado: boolean;
+    acreditado: boolean;
+    codigo_registro: string | null;
+    estado_sis: string;
+    fecha_verificacion: string;
+  };
 }
 
 export const REGIONES_COMUNAS: Record<string, string[]> = {

@@ -60,6 +60,9 @@ export default function App() {
   const filteredCentros = useMemo(() => {
     const cleanSearch = cleanText(searchTerm);
     return centros.filter((c) => {
+      // Ignorar centros que han sido marcados como inactivos (por ejemplo, cerrados permanentemente)
+      if (c.activo === false) return false;
+
       const matchSearch = cleanSearch === '' || 
         cleanText(c.nombre).includes(cleanSearch) ||
         cleanText(c.direccion).includes(cleanSearch) ||
