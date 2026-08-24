@@ -1,12 +1,8 @@
 import React from 'react';
 import { Heart, Search, ShieldCheck, MapPin, Award, Building2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-interface HomeLandingProps {
-  onStartSearch: () => void;
-  onViewPrivacy: () => void;
-}
-
-export const HomeLanding: React.FC<HomeLandingProps> = ({ onStartSearch, onViewPrivacy }) => {
+export const HomeLanding: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between font-sans">
       {/* Header */}
@@ -18,12 +14,12 @@ export const HomeLanding: React.FC<HomeLandingProps> = ({ onStartSearch, onViewP
             </div>
             <span className="text-slate-900 font-extrabold tracking-tight text-lg">MedFinder Chile</span>
           </div>
-          <button
-            onClick={onStartSearch}
+          <Link
+            to="/buscar"
             className="bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold py-2 px-4 rounded-xl shadow-sm transition-colors cursor-pointer"
           >
             Buscar Ahora
-          </button>
+          </Link>
         </div>
       </header>
 
@@ -44,13 +40,13 @@ export const HomeLanding: React.FC<HomeLandingProps> = ({ onStartSearch, onViewP
           </p>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={onStartSearch}
-              className="w-full sm:w-auto bg-rose-600 hover:bg-rose-700 text-white text-lg font-bold py-4 px-10 rounded-2xl shadow-lg shadow-rose-500/20 hover:shadow-xl transition-all flex items-center justify-center gap-2.5 group cursor-pointer"
+            <Link
+              to="/buscar"
+              className="w-full sm:w-auto bg-rose-600 hover:bg-rose-700 text-white text-lg font-bold py-4 px-10 rounded-2xl shadow-lg shadow-rose-500/20 hover:shadow-xl transition-all flex items-center justify-center gap-2.5 group cursor-pointer text-center"
             >
               <Search className="h-5 w-5 transition-transform group-hover:scale-110" />
               Comenzar Búsqueda
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -101,12 +97,12 @@ export const HomeLanding: React.FC<HomeLandingProps> = ({ onStartSearch, onViewP
               <span>Plataforma 100% gratuita y colaborativa de salud chilena.</span>
             </div>
             <div className="flex gap-4 mt-1">
-              <button 
-                onClick={onViewPrivacy} 
+              <Link 
+                to="/privacidad" 
                 className="hover:text-white transition-colors cursor-pointer underline"
               >
                 Políticas de Privacidad
-              </button>
+              </Link>
               <span>|</span>
               <p>© {new Date().getFullYear()} MedFinder Chile. Proyecto libre y gratuito.</p>
             </div>

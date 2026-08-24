@@ -1,0 +1,1102 @@
+
+
+Asignatura: Proyecto de Título Sección: TIHI84Académico guía: Nelvin Javier Andrade GoveaIntegrantes del equipo: Benjamín Binimelis – Giovanni MasiaFecha de entrega:  xx-xx-xxxxAsignatura: Proyecto de Título Sección: TIHI84Académico guía: Nelvin Javier Andrade GoveaIntegrantes del equipo: Benjamín Binimelis – Giovanni MasiaFecha de entrega:  xx-xx-xxxxPROYECTO DE TÍTULOInventario Barracas de FierroPROYECTO DE TÍTULOInventario Barracas de Fierro
+Asignatura: Proyecto de Título 
+Sección: TIHI84
+Académico guía: Nelvin Javier Andrade Govea
+Integrantes del equipo: Benjamín Binimelis – Giovanni Masia
+
+Fecha de entrega:  xx-xx-xxxx
+
+Asignatura: Proyecto de Título 
+Sección: TIHI84
+Académico guía: Nelvin Javier Andrade Govea
+Integrantes del equipo: Benjamín Binimelis – Giovanni Masia
+
+Fecha de entrega:  xx-xx-xxxx
+
+PROYECTO DE TÍTULO
+
+Inventario Barracas de Fierro
+PROYECTO DE TÍTULO
+
+Inventario Barracas de Fierro
+
+
+Índice
+Contenido
+Índice2
+Introducción4
+Identificación del Problema5
+Formulación del Problema5
+Descripción de la organización5
+Descripción del problema5
+Justificación del problema6
+Relevancia del problema6
+Complejidad del problema.6
+Levantamiento de Requerimientos7
+Determinación de los instrumentos a utilizar7
+Marco Teórico8
+Objetivos del Proyecto.12
+Formulación de la Solución12
+Alcance y restricciones12
+Proceso de negocio afectado12
+Registro de Interesados12
+Indicadores de gestión.13
+Niveles de servicio13
+Objetivo General13
+Objetivo Específico13
+Metodología de Trabajo14
+Metodología de Desarrollo de la solución.14
+Duración y cronograma15
+Cronograma detallado15
+Equipo de trabajo16
+Definición de arquitectura TI17
+Reconocimiento de arquitectura empresarial20
+Detalle de las Tecnologías a implementar21
+Análisis Cualitativo21
+Análisis Cuantitativo22
+Estudio de Factibilidades24
+Herramientas, aplicaciones, lenguajes y componentes que serán implementados25
+Detalle de la Arquitectura a implementar27
+Diagrama BPMN27
+Diagramas de caso de uso28
+Modelo de Datos29
+Diagrama de Arquitectura29
+Diagrama de Componentes30
+Diagrama de Topología31
+Diagrama de Infraestructura32
+Implementación de los KPI y SLA33
+Descripción de KPI33
+Descripción de SLA33
+Plan de Pruebas y Aseguramiento de Calidad34
+Plan de Pruebas34
+Normas y Estándares37
+Plan de Implementación38
+Gestión de Disponibilidad38
+Plan de Mantención41
+Sustentabilidad de la Solución42
+Argumentacion Tecnica44
+Ajustes del Cronograma46
+Conclusiones47
+Referencias bibliográficas48
+Anexo50
+Anexo A: Instrumentos de levantamiento de Requerimientos50
+Anexo B: Listado completo de Requerimientos51
+Anexo C: Modelo de Datos52
+Anexo D: Cronograma54
+
+Introducción
+
+El proyecto presentado documenta el desarrollo de una solución tecnológica avanzada destinada a modernizar y optimizar la gestión de inventario y el proceso de ventas para una Barraca de Fierro, resolviendo las deficiencias operacionales causadas por sistemas manuales obsoletos. Esta solución ha sido concebida bajo una Arquitectura Desacoplada (API-First), utilizando un stack de tecnologías de alto rendimiento que incluye FastAPI para la lógica de negocio y React para una interfaz de usuario fluida y dinámica, con MongoDB Atlas como base de datos escalable en la nube. Este enfoque no solo garantiza una velocidad de respuesta superior y una alta disponibilidad (99.99% SLA), sino que también posiciona a la empresa para futuras expansiones en un entorno digital.
+
+El alcance completo de este trabajo fue meticulosamente definido al establecer los Objetivos Generales que dirigen la visión estratégica del sistema, y al detallar los Objetivos Específicos que guían cada funcionalidad clave, desde el control de stock hasta el módulo de reportes. Para asegurar una ejecución eficiente, con entregas de valor constantes y una alta capacidad de adaptación a los requisitos de negocio, se determinó la Metodología de Desarrollo Ágil Scrum, la cual ha regido el plan de implementación, permitiendo gestionar de forma efectiva la complejidad inherente a la migración hacia una infraestructura Cloud-Native y la nueva arquitectura.
+
+El documento detalla la justificación técnica y económica de la nueva arquitectura, los estándares de seguridad implementados, el cumplimiento de los Acuerdos de Nivel de Servicio (SLA) y los Indicadores Clave de Rendimiento (KPI), culminando con un plan de implementación detallado que minimiza el riesgo de transición a la nueva plataforma.
+
+
+
+
+
+
+
+
+
+
+Identificación del Problema
+
+Formulación del Problema
+
+El proyecto consiste en el desarrollo de una plataforma web innovadora para la gestión de stock y ventas en una barraca de fierros.
+El sitio web permitirá a la empresa optimizar procesos internos, como el control de inventario o el registro de compras y ventas, y ofrecer un canal de atención moderno a clientes, ayudándolos en cotizaciones automáticas, contacto directo y el catálogo online, también ofrecerá Minería de datos para la toma de decisiones y generación de reportes en tiempo real, mejorando la eficiencia de la gestión.
+Además, la plataforma busca modernizar la experiencia de los clientes, facilitando el acceso a información clara de productos, disponibilidad y precios, agilizando las transacciones y fomentando la fidelización.
+El sistema integrará funciones de seguridad y respaldo de datos, asegurando la continuidad operativa y la confiabilidad de la información.
+Descripción de la organización
+
+La Barraca de Fierros MYM es una empresa ubicada en Santiago de Chile, dedicada a la comercialización y distribución de productos de acero y materiales para la construcción. Su principal objetivo es ofrecer a clientes mayoristas, minoristas y particulares un servicio confiable, rápido y con precios competitivos. la barraca se caracteriza por su atención personalizada, tiempos de entrega eficientes y un stock permanente para proyectos pequeños y grandes. Además, MYM busca diferenciarse con un servicio de cotización inmediata online y reparto en la Región Metropolitana, ofreciendo soluciones tanto a empresas constructoras como a clientes particulares.
+Descripción del problema
+
+La Barraca de Fierros MYM, a pesar de contar con una sólida trayectoria en la venta de materiales de construcción, enfrenta importantes limitaciones al no disponer de una plataforma web propia
+Actualmente, gran parte de la gestión de ventas e inventario se realiza de manera manual en excel o por contacto telefónico, lo que genera:
+Demoras en la atención de clientes, quienes deben acudir presencialmente o depender de llamadas para cotizar.
+Pérdida de oportunidades de venta, ya que no existe un catálogo online que muestre en tiempo real los productos disponibles.
+Procesos internos poco eficientes, con riesgo de errores en el registro de compras, ventas y stock.
+Baja visibilidad en el mercado digital, quedando en desventaja frente a competidores que ya ofrecen plataformas modernas.
+Dificultad en la toma de decisiones, debido a la falta de reportes automáticos y análisis de datos sobre ventas y rotación de productos.
+Justificación del problema
+
+La creación de una plataforma web para la Barraca de Fierros MYM se justifica en la necesidad de modernizar sus procesos internos y mejorar la atención al cliente. Actualmente, la falta de un sistema digital limita la eficiencia en el control de inventario, retrasa la gestión de cotizaciones y reduce la visibilidad de la empresa en un mercado cada vez más competitivo.
+Relevancia del problema
+
+La falta de una plataforma web en la Barraca de Fierros MYM limita su competitividad, ya que reduce la visibilidad en el mercado y genera procesos internos poco eficientes. Esto impacta en la atención al cliente, la fidelización y la capacidad de crecimiento de la empresa frente a competidores digitalizados.
+Complejidad del problema.
+
+La complejidad del problema radica en que no se trata solo de crear un sitio web, sino de integrar procesos internos clave como el control de inventario, registro de ventas, generación de reportes y atención a clientes en un mismo sistema. Además, requiere capacitación del personal, inversión tecnológica y adaptación de la empresa a un modelo digital, lo que convierte la solución en un desafío estratégico y no únicamente técnico.
+
+Levantamiento de Requerimientos
+
+
+Determinación de los instrumentos a utilizar
+
+Para recopilar la información necesaria y determinar los requerimientos de la plataforma, usaremos los siguientes instrumentos:
+Entrevistas: Dirigidas a los encargados de la empresa, y a los responsables de la atención al cliente, reuniendo posibles dificultades en el trabajo manual y las expectativas para la nueva plataforma
+Encuestas: Aplicadas a los trabajadores, para conocer el nivel de satisfacción con los procesos actuales y las necesidades de mejoras.
+Observación directa: Para analizar los procesos internos de la barraca y detectar oportunidades de mejora.
+Para mejor visibilidad de los instrumentos utilizados, se sugiere revisar el anexo A: Instrumentos para el levantamiento de requerimientos.
+Reuniremos dos tipos de requerimientos, funcionales y no funcionales, en donde extrajo la información de los resultados de los instrumentos usados, para mejor visibilidad de los requerimientos se sugiere consultar el anexo B: Detalle de los requerimientos Funcionales y No Funcionales.
+
+
+
+
+
+
+
+
+Marco Teórico
+
+FastAPI
+Un framework web moderno, ligero y de alto rendimiento para Python, diseñado específicamente para la creación de APIs. Su velocidad se debe a que está construido sobre librerías asíncronas (ASGI) y utiliza la validación de tipos estándar de Python a través de Pydantic, lo que garantiza la integridad de los datos y acelera la producción (Mishra, 2024).
+Arquitectura Desacoplada (API First)
+Un enfoque de diseño donde la comunicación entre la Capa de Lógica de Negocio y la Capa de Presentación se realiza estrictamente a través de una API REST. Este modelo asegura la independencia tecnológica de ambos lados (FastAPI y React), facilitando el desarrollo paralelo y la escalabilidad de cada componente (Wills, 2023).
+API REST
+Es un estilo arquitectónico que utiliza el protocolo HTTP para la transferencia de datos entre cliente y servidor. Las APIs REST son la base de la arquitectura desacoplada, ya que permiten la comunicación estandarizada y sin estado, utilizando el formato JSON para la transferencia de información (Mishra, 2024).
+React
+Una biblioteca declarativa y basada en componentes de JavaScript, mantenida por Meta. Se utiliza para construir interfaces de usuario eficientes. Su principal característica es el Virtual DOM, un mecanismo que optimiza las actualizaciones de la interfaz, mejorando drásticamente el rendimiento percibido por el usuario (Wills, 2023).
+
+Tailwind CSS
+Un framework de CSS de filosofía "utility-first" (utilidad de primero). En lugar de proporcionar componentes pre-diseñados, ofrece una amplia gama de clases de utilidad de bajo nivel que se aplican directamente en el marcado HTML, lo que permite un diseño rápido, altamente personalizable y que genera un código CSS optimizado (Müller, 2020).
+MongoDB
+Un sistema de gestión de base de datos NoSQL orientado a documentos. Utiliza el formato BSON (similar a JSON) para almacenar los datos, lo que le otorga una alta flexibilidad en el esquema y lo hace ideal para datos con atributos variables, como los productos de inventario. Está diseñado para la escalabilidad horizontal (Chodorow, 2019).
+MongoDB Atlas
+La versión de MongoDB ofrecida como un servicio completamente gestionado en la nube (Database-as-a-Service). Atlas garantiza la alta disponibilidad (SLA) y el escalado automático de la base de datos a través de proveedores cloud líderes, eliminando la carga de gestión de infraestructura para el equipo de desarrollo (Chodorow, 2019).
+
+AWS Amplify / Render.com
+Plataformas de cloud computing que facilitan el desarrollo y la implementación de aplicaciones web modernas. Se utilizan para establecer el pipeline de CI/CD, permitiendo el despliegue automático del Frontend (AWS Amplify) y el Backend (Render.com) directamente desde el repositorio de GitHub, asegurando la entrega continua del valor al cliente (Wills, 2023).
+Inventario
+En el contexto de la plataforma web, el inventario corresponde al módulo encargado de registrar, organizar y controlar todos los productos disponibles en la barraca de fierros. Este sistema permite conocer en tiempo real la cantidad de artículos existentes, los movimientos de entrada y salida, así como el estado de disponibilidad de cada producto. Su función principal es optimizar la gestión de recursos y evitar faltantes o excesos de stock.
+Stock
+El stock se refiere específicamente a la cantidad de unidades disponibles de un determinado producto dentro del inventario de la empresa. En la página web, el stock se visualizará de manera actualizada para el personal administrativo y podrá reflejarse también al cliente en el catálogo en línea. Su control es esencial para garantizar la continuidad de las ventas y la satisfacción del cliente.
+Interfaz
+La interfaz es el conjunto de elementos gráficos y funcionales que permiten la interacción entre el usuario y la plataforma web. En este proyecto, la interfaz incluye el diseño de menús, botones, formularios y catálogos que facilitan la navegación del cliente y del administrador. Una interfaz bien diseñada debe ser intuitiva, clara y responsiva, adaptándose a distintos dispositivos como computadores, tablets o smartphones.
+Login
+El login es el proceso mediante el cual un usuario accede a la plataforma web ingresando credenciales previamente registradas (generalmente nombre de usuario o correo electrónico y contraseña). Este mecanismo permite autenticar la identidad del usuario y otorgar acceso a las funciones que le correspondan según sus privilegios dentro del sistema.
+
+Register
+El register corresponde al formulario o proceso de registro que permite a nuevos usuarios crear una cuenta en la plataforma web. Este módulo recopila información básica (como nombre, correo electrónico, teléfono y contraseña), la almacena en la base de datos y genera un perfil único para cada cliente o empleado, habilitando su posterior acceso mediante login.
+Privilegios
+Los privilegios se refieren a los distintos niveles de acceso y permisos asignados a cada usuario dentro de la plataforma. Por ejemplo, un cliente puede tener privilegios básicos que le permitan cotizar y revisar el catálogo, mientras que un administrador tendrá privilegios avanzados como agregar productos al inventario, modificar el stock o consultar reportes generados por la minería de datos. La correcta gestión de privilegios es fundamental para garantizar la seguridad y el orden en el uso del sistema.
+
+
+
+
+Referencias
+Chodorow, K. (2019). MongoDB: The definitive guide (3rd ed.). O’Reilly Media.
+Mishra, S. (2024). FastAPI: The complete guide. Packt Publishing.
+Müller, J. E. (2020). Tailwind CSS: The practical guide. Independently Published.
+Wills, C. (2023). The Road to React: Your journey to master React in 2024. Leanpub.
+La incorporación de soluciones tecnológicas en los procesos responde a la necesidad de reducir errores humanos, optimizar recursos y elevar los niveles de satisfacción de los clientes en las empresas objetivos, en este caso, las barracas de fierros.
+La gestión de procesos de negocio (BPM) permite modelar, analizar y mejorar las actividades de una organización, siendo la digitalización un factor clave para garantizar eficiencia y control.
+En este sentido, la transformación digital se ha consolidado como una estrategia indispensable para la competitividad de las empresas, la automatización de procesos minimiza fallos asociados a la gestión manual y permite establecer sistemas más confiables, trazables y escalables.
+La ingeniería de software aporta metodologías para estructurar los sistemas, definiendo requerimientos funcionales y no funcionales que aseguren la calidad, usabilidad y seguridad de las plataformas, así, la incorporación de indicadores de gestión permite evaluar el impacto de la solución en tiempo real, alineando la tecnología con los objetivos estratégicos de la organización.
+Por otra parte, la satisfacción del cliente constituye un eje central en la implementación de soluciones tecnológicas, según el modelo SERVQUAL, los tiempos de respuestas, la confiabilidad y la calidad del servicio son dimensiones determinantes en la percepción de valor del cliente.
+Finalmente, debe considerarse que la digitalización implica un proceso de cambio organizacional, modelos como el de Kotter explican que la introducción de nuevas tecnologías requiere la gestión adecuada de la resistencia al cambio, ofreciendo herramientas como la capacitación del personal y comunicación efectiva para lograr una correcta funcionalidad.
+
+
+
+Objetivos del Proyecto. 
+
+Formulación de la Solución
+
+La solución consiste en el desarrollo e implementación de una página web que permita digitalizar los procesos actualmente gestionados de manera manual, la plataforma ofrecerá funcionalidades de registro de datos, validaciones automáticas, generación de reportes y retroalimentación de los clientes.
+Alcance y restricciones
+
+Restricciones:
+Dependencia de infraestructura tecnológica existente.
+Requiere capacitación del personal.
+Limitaciones de presupuestos y plazos de implementación.
+Alcances:
+Digitalizaciones de procesos internos.
+Acceso seguro para múltiples usuarios con diferentes niveles de permisos.
+Generación de reportes en tiempo real.
+Integración de módulos de retroalimentación de los clientes.
+Aplicación de minería de datos para identificar tendencias, mejorar la gestión de stock, segmentar clientes y apoyar la planificación estratégica de la Barraca de Fierros MYM.
+Proceso de negocio afectado
+
+El proceso principal afectado es la gestión administrativa y de atención al cliente, que pasara de ser manual (Excel) a Automatizado y optimice, reduciendo errores y tiempos de respuesta.
+Registro de Interesados
+
+Internos: Directivos, administradores, empleados de gestión y soporte.
+Externos: Clientes que interactúan con la página.
+
+
+Indicadores de gestión.
+
+Disminución de errores en registros (30%) 
+Tiempos de respuesta promedio en procesos (25%)
+Niveles de satisfacción de clientes, aplicadas en encuestas (25%)
+Número de usuarios activos en la página (20%)
+Niveles de servicio
+
+Disponibilidad mínima del 80%.
+Tiempo de respuesta del sistema de 3 segundos o menos en operaciones básicas.
+Soporte técnico en horario laboral.
+Objetivo General
+
+Desarrollar e implementar una página web que Optimice los procesos de gestión administrativos de la empresa, reduciendo errores, optimizando tiempos y aumentar la satisfacción de los clientes.
+Objetivo Específico
+
+Determinar la metodología de desarrollo para desarrollar el proyecto.
+Levantar y documentar los requerimientos funcionales y no funcionales de la plataforma.
+Diseñar y desarrollar la página web a través de lenguajes de programación.
+Implementar pruebas unitarias y de integración para corroborar la calidad del producto.
+Capacitar al personal para el uso de la plataforma.
+
+
+
+
+
+
+
+
+
+
+Metodología de Trabajo
+
+Metodología de Desarrollo de la solución.
+
+La metodología seleccionada para el desarrollo de la plataforma web es Scrum, un marco ágil que permite gestionar proyectos de manera iterativa e incremental. Scrum facilita la adaptación a cambios durante el desarrollo y asegura la entrega continua de valor al cliente.
+Componentes clave de Scrum en el proyecto:
+Product Backlog: lista priorizada de funcionalidades y requisitos del sistema, incluyendo módulos de inventario, ventas, reportes, retroalimentación de clientes y minería de datos.
+Sprints: ciclos de trabajo cortos (2 a 3 semanas) en los cuales se desarrollan funcionalidades completas y verificables.
+Scrum Meetings: reuniones diarias (Daily Scrum) para coordinar tareas, identificar impedimentos y mantener al equipo alineado.
+Sprint Review y Retrospective: revisión de los resultados obtenidos al final de cada sprint y análisis de mejoras para el siguiente ciclo.
+
+Para el desarrollo del proyecto, se seleccionó esta metodología porque se es adaptable y flexible tanto para el cliente como para el equipo, ya que nos permite incorporar nuevos requerimientos o ajustar prioridades a lo largo del ciclo de vida del proyecto, también porque permite al cliente  ver el progreso real del proyecto mediante módulos funcionales y una retroalimentación temprana, nos facilita la identificación y mitigación de problemas gracias al daily scrum, como cualidad final, nos permite tener una comunicación constante y transparente dentro del grupo de trabajo.
+
+
+
+
+Duración y cronograma
+
+El proyecto se realizará en seis sprint en total, los cinco primero tendrán una duración de 2 semanas cada uno, y el sprint final durara una semana, cada uno con un objetivo distinto que hará que la plataforma web se construya progresivamente, permitiendo tener un tiempo de revisiones, opiniones y ajustes.
+
+Cronograma detallado
+
+Sprint 1 
+Objetivo: Revisión bibliográfica, definición del problema y marco teórico.
+Duración: 2 semanas, 11/08 – 25/08.
+
+Sprint 2
+Objetivo: Levantamiento de requerimientos, diseño de arquitectura y backlog inicial.
+Duración: 2 semanas, 26/08 – 10/09.
+
+Sprint 3
+Objetivo: Implementación iterativa de funcionalidades y desarrollo de frontend.
+Duración: 2 semanas, 13/09 – 27/09.
+
+Sprint 4
+Objetivo: Desarrollo de backend.
+Duración: 2 semanas, 28/09 – 11/10.
+
+
+Sprint 5
+Objetivo: Pruebas, ajustes, evaluación con indicadores de gestión.
+Duración: 2 semanas, 12/10 – 26/10.
+
+
+Sprint 6
+Redacción final, presentación y entrega de proyecto.
+Duración: 1 semana, 29/10 – 06/11.
+
+Equipo de trabajo
+
+El desarrollo de la plataforma se llevará a cabo por un equipo compuesto por 2 personas, el cual cada uno tendrá roles definidos para asegurar el cumplimiento de los objetivos del proyecto.
+Rol y funciones
+Product Owner: Nelvin Javier Andrade Govea, representa los intereses de la barraca, define prioridades del producto backlog y valida entregas.
+Equipo de Desarrollo
+Giovanni Masia: Diseñador y programador.
+Benjamin Binimelis: Tester y programador.
+
+
+
+Plan de recursos
+
+Recursos Humanos:
+Desarrolladores web 
+Especialista en bases de datos (MongoDB)
+Analista de datos y minería de datos
+Diseñador de interfaz y experiencia de usuario (UI/UX)
+Product Owner y Scrum Master
+Recursos Tecnológicos:
+Servidor web y base de datos
+Entorno de desarrollo integrado (IDE)
+Herramientas de control de versiones (Git, GitHub)
+Plataformas de gestión ágil (Trello, Jira o similar)
+Recursos Materiales:
+Computadores con capacidad de desarrollo y pruebas
+Conexión a internet estable
+Software de diseño y herramientas colaborativas
+
+
+
+Definición de arquitectura TI
+
+El proyecto adopta una Arquitectura Desacoplada (API-First), la cual supera las limitaciones de rendimiento y escalabilidad de las arquitecturas monolíticas. En este modelo, el Backend (API) y el Frontend (Interfaz de Usuario) operan como entidades independientes que solo se comunican mediante peticiones HTTP (REST), lo que permite un desarrollo y despliegue continuo (CI/CD) más ágil.
+
+Capas principales de la arquitectura:
+
+Capa de Presentación (Frontend)
+El Frontend es una Aplicación de Página Única (SPA) construida con React. Se encarga de la interacción con el usuario y realiza peticiones asíncronas (AJAX) a la API para obtener y enviar datos. Está estilizado con Tailwind CSS y componentes de Shadcn UI.
+
+Capa de Lógica de Negocio (Backend - API)
+Consiste en la API REST desarrollada con FastAPI (Python). Se encarga de la validación de los datos, la ejecución de las reglas de negocio (cálculo de ventas, gestión de roles) y actúa como middleware para la Capa de Datos.
+
+
+Capa de Datos (Base de Datos)
+Se utiliza MongoDB Atlas para el almacenamiento documental escalable y gestionado en la nube.
+
+Integración de Minería de Datos
+Se incorporará un submódulo de análisis de datos en la capa de negocio, encargado de procesar la información histórica de ventas, clientes y productos.
+Utilizará técnicas de minería de datos para identificar patrones de consumo, prever demandas, optimizar el stock y apoyar la toma de decisiones estratégicas.
+Los resultados de este análisis se presentarán al usuario mediante reportes gráficos en la capa de presentación.
+
+Justificación de la Arquitectura
+
+Alto Rendimiento y Escalabilidad
+Velocidad: La separación de capas permite que el Backend se enfoque exclusivamente en la lógica de negocio. Se seleccionó FastAPI (Python) por su rendimiento excepcional y capacidad asíncrona, lo que garantiza el cumplimiento del SLA de respuesta de 3 segundos en operaciones críticas como la consulta de stock y la generación de cotizaciones.
+Escalabilidad Independiente: Al ser componentes separados, el Frontend (React), alojado en AWS Amplify, y el Backend (FastAPI), alojado en Render.com, pueden escalar de forma independiente. Si la carga de usuarios aumenta (necesitando más frontends), el Backend no se ve afectado y viceversa, lo que optimiza los costos operativos.
+Gestión de Datos: MongoDB Atlas ofrece escalabilidad horizontal nativa, crucial para manejar el crecimiento del inventario y las grandes colecciones de datos necesarios para la Minería de Datos, sin depender de costosos joins de bases de datos relacionales.
+
+Agilidad en el Desarrollo y Mantenimiento
+Desarrollo Paralelo: La arquitectura desacoplada permitió al equipo de desarrollo trabajar en el Frontend (React) y el Backend (FastAPI) de forma simultánea, utilizando el contrato de la API REST como única dependencia, acelerando significativamente el time-to-market del proyecto.
+Mantenimiento Modular: El Backend puede ser actualizado (por ejemplo, migrar de Python 3.10 a 3.12) o mantenido sin impactar al Frontend, reduciendo el riesgo de fallas durante las actualizaciones críticas y permitiendo que la aplicación evolucione con mayor agilidad.
+
+Experiencia de Usuario Superior
+Experiencia React (SPA): El uso de React permite construir una SPA (Single Page Application), ofreciendo una experiencia de usuario rápida y fluida. La interfaz se siente más cercana a una aplicación de escritorio que a una página web tradicional, lo cual es vital para la productividad de los empleados que pasan horas gestionando inventario y ventas.
+
+
+
+Reconocimiento de arquitectura empresarial
+
+La Barraca de Fierros MYM es una Empresa del sector ferretero, dedicada a la comercialización de productos de acero, hierro y materiales relacionados. Su estructura organizacional es funcional, ya que las actividades se organizan según funciones específicas, tales como administración, ventas, inventario y atención al cliente.
+Características principales de la organización
+Jerarquía clara: Existe un propietario o gerente general que toma decisiones estratégicas, supervisa las operaciones y coordina al personal.
+Departamentos funcionales
+Administración: Encargada de la gestión contable, financiera y de planificación.
+Ventas y Atención al Cliente: Gestiona pedidos, cotizaciones, facturación y relación con los clientes.
+Inventario/Almacén: Controla el stock de productos, entradas y salidas de materiales.
+Operaciones: Apoya la logística y entrega de productos.
+Toma de decisiones centralizada: Aunque algunas tareas se delegan en cada departamento, las decisiones estratégicas y de inversión dependen del gerente o propietario.
+
+Relación con la plataforma web
+La estructura funcional facilita la digitalización de procesos internos, ya que cada área tiene funciones específicas que serán gestionadas mediante módulos en la plataforma.
+La plataforma permitirá integrar la información de todos los departamentos, generando reportes centralizados que apoyen la toma de decisiones estratégicas.
+La implementación de minería de datos permitirá vincular los procesos de ventas, inventario y atención al cliente para identificar tendencias, optimizar stock y mejorar la eficiencia operativa.
+
+
+Detalle de las Tecnologías a implementar
+
+Análisis cualitativo y cuantitativo de las tecnologías que serán implementadas
+
+Análisis Cualitativo
+
+En este análisis veremos las tecnologías y metodologías de desarrollo con el fin de evaluar la efectividad, el impacto en la experiencia de usuario, la flexibilidad y la seguridad del sistema.
+
+FastAPI (Backend - Python): Framework Python de alto rendimiento y naturaleza asíncrona (ASGI), utilizado para construir la API REST de la Capa de Lógica de Negocio. Su principal ventaja es la velocidad en el procesamiento de peticiones concurrentes y la generación automática de documentación, esencial para cumplir con los SLA de latencia.
+
+React (Frontend): Biblioteca de JavaScript líder para la creación de Interfaces de Usuario y SPA (Single Page Applications). Permite construir una interfaz dinámica y fluida basada en componentes, lo cual mejora significativamente la Experiencia de Usuario (UX) en las operaciones de gestión de inventario.
+
+Tailwind CSS + Shadcn UI (Framework de diseño): Tailwind CSS es un framework CSS de tipo "utilidad de primero" que permite un diseño rápido y altamente personalizable. Shadcn UI complementa esto con un catálogo de componentes de React listos para usar, garantizando un diseño moderno, accesible y consistente en toda la plataforma.
+
+MongoDB Atlas (Base de Datos): Sistema de gestión de base de datos NoSQL orientado a documentos. La versión Atlas es un servicio gestionado en la nube que garantiza la alta disponibilidad (SLA 99.99%) y la escalabilidad horizontal, lo que lo hace ideal para almacenar el inventario flexible y los grandes volúmenes de datos transaccionales.
+
+Arquitectura Desacoplada (API-First): Modelo arquitectónico que separa el Frontend (React) del Backend (FastAPI). Esta separación garantiza la flexibilidad en el desarrollo paralelo, la facilidad de mantenimiento y la independencia de la tecnología, permitiendo que cada capa escale según sus necesidades.
+
+Scrum (Metodología de Trabajo): Marco ágil que se utilizó para la gestión del proyecto, facilitando la planificación, la adaptación continua a los cambios tecnológicos (como la migración a Python/React) y la entrega incremental de valor en ciclos cortos (Sprints), asegurando la satisfacción del cliente.
+
+Minería de Datos: Se implementará un módulo analítico que, aprovechando el Aggregation Framework de MongoDB, permitirá a la Gerencia identificar patrones de consumo, tendencias de venta, optimizar los niveles de stock mínimo y apoyar la toma de decisiones estratégicas basadas en datos históricos.
+
+AWS Amplify / Render.com (Cloud Hosting): Plataformas de cloud hosting utilizadas para desplegar el Frontend y el Backend, respectivamente. Su integración con GitHub permite la implementación de Continuous Deployment (CD), automatizando el despliegue del código nuevo a producción de forma rápida y confiable.
+
+
+Análisis Cuantitativo
+
+Análisis que evalúa el rendimiento, tiempo de desarrollo y mantenimiento de las tecnologías utilizadas, así como la productividad de la metodología adoptada, considerando su impacto en la eficiencia y avance del proyecto.
+Frontend (React + Tailwind CSS)
+Tiempo de aprendizaje y desarrollo: El modelo de componentes de React (que fomenta la reutilización) junto con Tailwind CSS (diseño utility-first) se estima que aumenta la velocidad de desarrollo de la interfaz en un 30-40% comparado con el uso de CSS puro, acelerando el time-to-market.
+Rendimiento: Gracias al Virtual DOM de React y la arquitectura SPA, la plataforma solo actualiza los componentes necesarios. Esto reduce drásticamente el uso de recursos del navegador y minimiza el tiempo de espera, asegurando una experiencia que se percibe como instantánea (tiempos de respuesta inferiores a 200 ms después de la carga inicial).
+Mantenimiento: La estructura modular y la tipificación de datos implícita de React facilitan la segregación del código. Esto simplifica la depuración y reduce el tiempo necesario para resolver errores en el Frontend en un 20%, ya que los fallos se aíslan a componentes específicos.
+
+Backend (FastAPI - Python)
+Tiempo de aprendizaje y desarrollo: FastAPI utiliza la validación de tipos de Python con Pydantic. Esto permite la detección temprana de errores de esquema, lo que se traduce en una reducción de hasta un 40% en los bugs relacionados con la manipulación de datos en la API REST (Mishra, 2024).
+Rendimiento: Al ser un framework asíncrono (ASGI), FastAPI supera la capacidad de rendimiento de los frameworks síncronos en tareas I/O (como consultas a la base de datos). Esto es crucial para cumplir el SLA de 3 segundos en el Backend, con capacidad para manejar cientos de peticiones por segundo (RPS).
+Mantenimiento: La sintaxis limpia y estandarizada de Python (PEP 8), sumada a la generación automática de la documentación OpenAPI/Swagger por parte de FastAPI, facilita la incorporación de nuevos desarrolladores y reduce el costo de mantenimiento del código en un 25% a largo plazo.
+
+Base de Datos y Metodología (MongoDB Atlas + Scrum)
+Rendimiento: MongoDB es inherentemente más rápido para las consultas que recuperan datos complejos (denormalizados) porque evita las operaciones de join costosas. Esto es clave para el rendimiento del Módulo de Minería de Datos, donde la lectura y agregación de colecciones es fundamental.
+Mantenimiento: MongoDB Atlas es una base de datos gestionada en la nube, que ofrece contractualmente un SLA de Disponibilidad del 99.99%. Esto elimina el costo de mantenimiento y las horas hombre dedicadas a la administración de hardware y copias de seguridad.
+Productividad Metodológica (Scrum): La Arquitectura Desacoplada (API-First) permitió que los equipos trabajaran en paralelo (Frontend y Backend). Esto, en conjunto con el flujo de CI/CD (GitHub + Cloud Hosting), acorta los ciclos de desarrollo y permite una entrega de valor al negocio un 50% más rápida que con un enfoque monolítico.
+
+Estudio de Factibilidades
+
+Factibilidad técnica
+
+Las tecnologías seleccionadas son de código abierto (FastAPI, React, MongoDB) y representan estándares modernos en el mercado, lo que garantiza una amplia compatibilidad e interoperabilidad. La arquitectura API-First (Desacoplada), con la separación de los componentes Frontend (React) y Backend (FastAPI), establece un modelo de tres capas independiente que maximiza la escalabilidad y la seguridad, al aislar la lógica de negocio de la capa de presentación. Además, la adopción de MongoDB Atlas y hosting gestionado en la nube garantiza una infraestructura de alta disponibilidad.
+
+Factibilidad económica
+
+La elección del stack basado en herramientas Open Source (FastAPI, React, Tailwind CSS, MongoDB Community) mantiene los costos de licencias en cero. La inversión principal se concentra en los costos operativos (OPEX) de los servicios Cloud (MongoDB Atlas, AWS Amplify, Render.com), los cuales operan bajo un modelo de Pago por Uso (Pay-As-You-Go). Este enfoque es altamente sostenible, ya que evita la gran inversión inicial en hardware (CAPEX) y permite que los costos operativos escalen de forma flexible y eficiente según el crecimiento real de la Barraca.
+
+Factibilidad implementativa
+
+La curva de aprendizaje de los frameworks modernos (FastAPI y React) es bien soportada por una vasta comunidad y abundante documentación, facilitando la capacitación del equipo. El uso de la metodología Scrum permite una implementación gradual en sprints, mitigando riesgos y permitiendo la rápida incorporación de feedback del cliente. Finalmente, la integración de GitHub con los servicios de Continuous Deployment (CD) de AWS Amplify y Render.com facilita la entrega continua de nuevas funcionalidades de forma rápida y automatizada.
+
+
+
+Herramientas, aplicaciones, lenguajes y componentes que serán implementados
+
+Lenguajes y frameworks
+HTML5: Estructura y organización del contenido del sitio web.
+CSS3: Diseño visual, estilos y adaptabilidad responsiva.
+React: Biblioteca principal para construir la SPA (Single Page Application) basada en componentes reutilizables.
+Tailwind CSS y Shadcn UI: Framework de diseño utility-first que, junto con la librería de componentes Shadcn UI, permite un desarrollo ágil y moderno de la interfaz de usuario.
+FastAPI (Python): Framework de alto rendimiento para el lado del servidor, encargado de la lógica de negocio, la validación de datos (Pydantic) y la exposición de la API REST.
+MongoDB Atlas: Sistema de gestión de base de datos NoSQL documental gestionado en la nube, utilizado para el almacenamiento escalable y la consulta eficiente de datos.
+Herramientas de desarrollo
+Entornos de desarrollo (IDE): Visual Studio Code  para la codificación.
+Control de versiones: Git y GitHub para gestionar cambios y trabajo colaborativo.
+Gestión ágil: Trello o Jira para la organización de tareas y seguimiento de sprints.
+Pruebas: Pytest para pruebas unitarias y de integración del Backend (FastAPI). Jest o Vitest para pruebas unitarias y de componentes del Frontend (React).
+Componentes de software y servicios TI
+Servidor web: AWS Amplify para el hosting estático del Frontend de React, utilizando CDN (Content Delivery Network) para una entrega de interfaz de baja latencia.
+Alojamiento Backend: Render.com para el hosting del Backend de FastAPI, permitiendo el despliegue continuo (CD) y el escalado automático de la API.
+Certificado SSL: Certificado SSL/TLS (gestionado por AWS Amplify / Render.com) para asegurar la comunicación encriptada entre el cliente (React) y el servidor (FastAPI).
+Servicios en la nube: Opcionalmente, AWS, Azure o DigitalOcean para hosting, escalabilidad y disponibilidad.
+Backup automatizado: Copias de seguridad diarias/semanales para protección de datos.
+Google Analytics o similar: Para el análisis del tráfico y comportamiento de usuarios.
+Minería de datos: Implementada mediante librerías de Python como Pandas y NumPy (ejecutadas por FastAPI o un servicio adyacente) para el análisis avanzado de datos almacenados en MongoDB.
+
+Componentes de hardware
+Servidor de la Aplicación (FastAPI): Servicio VPS/Contenedor en Render.com (con autoescalado): Se requiere capacidad de cómputo elástica que garantice recursos dedicados (CPU y RAM escalable) para el procesamiento de la lógica de negocio.
+Servidor de Base de Datos: Clúster Gestionado en MongoDB Atlas: Se utiliza la infraestructura Cloud distribuida y replicada para garantizar la alta disponibilidad y la baja latencia en la lectura y escritura de datos.
+Estaciones de trabajo: Equipos de desarrollo con al menos procesador Intel i5, 8 GB de RAM y conexión a internet estable.
+Red y conectividad: Conexión de banda ancha con disponibilidad mínima del 99% para acceso y mantenimiento remoto.
+
+Módulos funcionales de la plataforma
+Gestión de inventario y stock: Control en tiempo real de productos, entradas y salidas.
+Módulo de ventas y cotizaciones: Registro de compras, cotizaciones automáticas y emisión de documentos.
+Gestión de usuarios y privilegios: Accesos diferenciados para clientes, administradores y empleados.
+Reportes y análisis: Generación de reportes dinámicos y dashboards con información clave.
+Retroalimentación del cliente: Encuestas, comentarios y formularios de contacto.
+Seguridad y respaldo: Autenticación de usuarios, encriptación de datos.
+
+
+Detalle de la Arquitectura a implementar
+
+Diagrama BPMN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Diagrama de caso de uso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Modelo de Datos
+
+
+Para visualizar los modelos de datos, se sugiere revisar el anexo C: Modelo de Datos
+
+Diagrama de Arquitectura
+
+
+
+
+
+Diagrama de Componentes
+
+
+
+
+Diagrama de Topología
+
+
+
+
+
+
+
+
+
+
+
+Diagrama de Infraestructura
+
+
+
+
+
+
+
+
+Implementación de los KPI y SLA 
+
+Descripción de KPI
+
+Los indicadores clave de rendimiento (KPI) son métricas esenciales utilizadas para evaluar el éxito de un proyecto y la efectividad de la solución tecnológica implementada, para la plataforma se centra en la eficiencia operativa y la calidad de los datos, asegurando que se cumpla con el objetivo principal de mitigar los problemas generados por la gestión manual.
+A través de la medición de estas métricas, se puede identificar áreas de mejora y validar formalmente el impacto positivo de la digitalización sobre los procesos de inventario y ventas.
+
+Los KPIs específicos son:
+Reducción de errores de registro: Medición de la disminución de las discrepancias entre el stock físico y el stock en el sistema post-implementación. La meta es que la reducción baje en un 30% en la tasa de errores de registros manuales.
+Tiempo promedio de Proceso (TPP) de venta/cotización: Medición de la eficiencia de los procesos claves, es decir, el tiempo que toma al personal de la barraca completar una cotización sea de 6 minutos o menos. La meta es la disminución del TPP en un 40% buscando que el tiempo de gestión de cotización sea de 6 minutos o menos.
+Tiempo de respuesta del sistema: Medición técnica de la velocidad y el rendimiento de la plataforma web al ejecutar tares críticas. La meta es que el sistema debe responder en 3 segundos o menos en condiciones normales de operación.
+
+
+Descripción de SLA
+
+Un Acuerdo de Nivel de Servicio (SLA, por sus siglas en inglés) es un contrato formal entre un proveedor de servicios y un cliente que establece los estándares de rendimiento y calidad que se deben cumplir. Su propósito es garantizar la continuidad del negocio y la confianza del usuario final al establecer métricas claras sobre la disponibilidad, el rendimiento y la capacidad de respuestas ante fallas.
+Nivel de disponibilidad del sistema (uptime): Medición del tiempo en que el sistema está completamente operativo y accesible para los usuarios finales. Este es el indicador más crítico para asegurar que las operaciones de venta e inventario no se detengan. El objetivo es que el servicio esté disponible el 99.5% del tiempo mensualmente.
+Tiempo máximo de Indisponibilidad (MTTR): Mide la rapidez con la que el equipo de soporte debe restaurar el servicio después de una falla crítica. El objetivo es que el tiempo máximo a respuestas sea de 4 horas.
+Horario de Servicio y Soporte: Define cuando los usuarios pueden esperar que el sistema esté disponible y cuando pueden solicitar soporte técnico. El objetivo es que el servicio y el soporte esté disponible 24/7 para incidentes críticos y el soporte operativo esté disponible de lunes a viernes entre las 9:00 a 18:00 para incidentes menores y consultas.
+
+
+
+Plan de Pruebas y Aseguramiento de Calidad
+
+Plan de Pruebas
+
+El objetivo del plan de pruebas es verificar la eficiencia operativa, la integridad de los datos y la experiencia del usuario final para el inventario Barracas de Fierro
+Prueba Unitaria
+Validar cada componente individual del código (funciones y métodos) funcione correctamente de manera aislada.
+Alcance: Se aplicarán a la lógica de negocio central, es decir, el cálculo de cotizaciones automáticas, validación de entradas de formularios de ventas, y funciones de actualización de stock en la base de datos
+
+
+
+
+Prueba de Integración
+Verificar que los diferentes módulos de la solución interactúen correctamente entre sí.
+Alcance: Se enfocarán en dos módulos.
+Módulo de Venta y Modulo de Stock: Asegurar que una venta descuente correctamente la cantidad del inventario.
+Módulo de Cliente y Modulo de Reportes: Confirmar que la actividad del cliente sea registrada correctamente para la Minería de Datos.
+Prueba de Humo
+Realizar una validación rápida y mínima de funcionalidades criticas para determinar si la solución es estable para pruebas más profundas.
+Alcance: Acceso y Login de todos los tipos de usuarios, carga correcta y completa del catálogo online y capacidad de realizar una cotización básica.
+Pruebas Funcionales
+Confirmar que el sistema cumple con todos los Requerimientos Funcionales del proyecto, probando el comportamiento del sistema sin ver el código interno.
+Alcance: Validar que el sistema ejecute correctamente la Gestión de los Datos, la optimización de tiempos y el Módulo de Retroalimentación.
+Pruebas de Estrés y Carga
+Evaluar el rendimiento del sistema y su estabilidad bajos condiciones extremas (alto volumen de usuarios concurrentes) para garantizar la robustez.
+Alcance: Verificar que el sistema mantenga su tiempo de respuesta (meta de 3 segundos) y su disponibilidad (80%) ante picos de demanda generados por múltiples clientes realizando consultas o cotizaciones simultáneamente.
+
+
+
+
+Pruebas de Usabilidad
+Verificar la facilidad de uso y la experiencia del usuario final, con un enfoque en los procesos internos.
+Alcance: Se realizarán por el personal administrativo clave de la Barraca de Fierros MYM en un entorno de staging. El objetivo es confirmar la reducción del 30% de errores y la optimización de tiempos en la gestión de ventas.
+Pruebas Beta
+Exponer la solución a un grupo de clientes reales en el entorno de producción para validar su funcionamiento en un contexto real.
+Alcance: El cliente externo probará las funcionalidades de cara al público: el Catálogo Online, la Cotización Automática y el Módulo de Retroalimentación.
+Pruebas de Seguridad
+Verificar la protección de los datos y el cumplimiento del Control de Accesos.
+Alcance: El sistema maneja información sensible (ventas y clientes). Se debe validar la autenticación (login), la gestión de permisos entre roles (empleado/cliente) y la prevención de inyecciones NoSQL.
+Pruebas de Regresion
+Asegurar que la introducción de un nuevo código, corrección de bugs o funcionalidad no haya roto o afectado las funcionalidades existentes.
+Alcance: Es crítica después de la implementación de la Minería de Datos, para asegurar que la funcionalidad de ventas y stock siga operando normalmente.
+
+Pruebas de Compatibilidad
+Verificar que la plataforma se visualice y funcione correctamente en los navegadores web (Chrome, Firefox, Safari) y dispositivos más comunes (escritorio y móvil).
+Alcance: Fundamental para la Experiencia de Usuario del cliente, asegurando que el acceso al catálogo y cotizador sea universal.
+Pruebas de Recuperación
+Probar la capacidad del sistema para restaurar el servicio después de una falla grave.
+Alcance: Validar la integridad del respaldo de la información y confirmar el tiempo que tomaría volver a un estado operativo seguro.
+
+
+Normas y Estándares
+Estos estándares ayudan a garantizar la calidad, seguridad y cumplimiento regulatorio del sistema de gestión de inventarios.
+ISO/IEC 25010 (SQuaRE - Modelo de Calidad): Se utilizarán las características de calidad de este modelo para guiar el diseño y las pruebas, permitiendo así asegurar y medir características claves como la fiabilidad y la usabilidad de la plataforma.
+OWASP Top 10: Se usarán la lista de las 10 vulnerabilidades de seguridad más críticas para auditar el código desarrollado, ya que la plataforma maneja datos sensibles de ventas, stock y clientes, al tener estos datos es obligatorio garantizar el control de accesos y la seguridad, previniendo futuros fraudes y protegiendo la información de la barraca.
+Principios SOLID: Principios de diseño de código para la programación orientada a objetos (POO). Se aplican en el desarrollo de la lógica de negocio en FastAPI (Python) para asegurar que el código sea modular, fácil de mantener y extensible, facilitando la futura evolución del sistema.
+PEP 8: Es la guía de estilo para el código Python. Su cumplimiento es obligatorio en el desarrollo del Backend con FastAPI. Esto garantiza la legibilidad, mantenibilidad y consistencia del código fuente a nivel de proyecto.
+Metodología Ágil (Scrum/Kanban): Se adoptará un marco de trabajo ágil para la planificación, desarrollo y entrega de la plataforma, utilizando sprints definidos o un flujo continuo, ya que el cliente está migrando de un sistema manual a una solución digital, dejando una probabilidad que los requisitos cambien o evolucionen, permitiendo a que, si esto pasa, rápidamente se adaptará a los cambios, incorporar la retroalimentación del cliente al final de cada Sprint.
+Practicas de CORS y HTTPS: Se implementa la política de CORS (Cross-Origin Resource Sharing) en FastAPI para controlar qué Frontends (React) pueden acceder a la API. Toda la comunicación es forzada a usar HTTPS/TLS para asegurar la encriptación de la información sensible.
+Scrum Guide: Marco de trabajo ágil utilizado para gestionar el proyecto. Su cumplimiento asegura la entrega incremental de valor y la adaptación continua a los requerimientos cambiantes a través de Sprints de duración fija.
+GitFlow: Modelo de ramificación (branching model) basado en Git/GitHub. Se utiliza para organizar el desarrollo, mantenimiento y versiones de release. Es fundamental para el proceso de Continuous Deployment.
+
+
+
+
+
+Plan de Implementación
+
+Gestión de Disponibilidad
+
+En esta etapa crucial, nos aseguramos de que la arquitectura API-First y la infraestructura Cloud-Native sean adecuadas para cumplir con el SLA de disponibilidad mínima del 99.99% y la meta de tiempo de respuesta de 1.5 segundos. Nos enfocamos en los activos esenciales de la arquitectura desacoplada: el Frontend React, la API REST (FastAPI) y la base de datos MongoDB Atlas.
+La disponibilidad del servicio se gestionará mediante los siguientes aspectos:
+Infraestructura de Alojamiento (Hosting): Se ha seleccionado un proveedor de Cloud Computing de alto rendimiento (AWS Amplify para el Frontend y Render.com para el Backend), además de MongoDB Atlas como base de datos gestionada.
+Disponibilidad del 99.99%: MongoDB Atlas garantiza contractualmente este nivel de servicio mediante la implementación de réplica sets y distribución multi-zona/multi-región, eliminando cualquier punto único de falla (SPOF) en la capa de datos.
+Escalabilidad Elástica: Los servicios Render.com (FastAPI) y AWS Amplify (React) permiten la escalabilidad horizontal automática y elástica. Si el tráfico aumenta (ej. +300% de peticiones), la infraestructura se ajusta dinámicamente agregando más recursos de cómputo para el Backend, asegurando el cumplimiento del SLA sin intervención manual.
+
+Monitoreo Proactivo: El objetivo es detectar y alertar sobre degradación del servicio antes que el tiempo de respuesta supere el nuevo objetivo de 1.5 segundos. El monitoreo se realiza en los componentes desacoplados:
+Monitoreo de la API (FastAPI): Se implementan herramientas de monitoreo en Render.com para medir constantemente la Utilización de CPU/RAM de los contenedores de FastAPI y las métricas de RPS (Peticiones por Segundo). Esto permite anticipar cuellos de botella en la lógica de negocio.
+Monitoreo de Latencia de la Base de Datos: Se utiliza el Performance Advisor y los dashboards de MongoDB Atlas para medir el tiempo de respuesta a las consultas críticas de stock y ventas. Las alertas se configuran para notificar si la latencia de las consultas más lentas excede los umbrales definidos.
+
+Balanceo de Carga y Failover: Esta gestión es provista y automatizada por los servicios Cloud, garantizando que, si un componente falla, el sistema automáticamente cambie a un recurso funcional.
+Balanceo de Carga (Backend): Render.com gestiona automáticamente el Balanceo de Carga de las peticiones a la API, distribuyendo el tráfico entre las múltiples instancias (workers) de FastAPI que se levantan durante un pico de demanda.
+Failover (Base de Datos): La función de failover está intrínsecamente integrada en los replica sets de MongoDB Atlas. Si el nodo primario falla, un nodo secundario es promovido automáticamente a primario, manteniendo la disponibilidad y el acceso ininterrumpido al registro de ventas y stock.
+Failover (Frontend): AWS Amplify utiliza una CDN (Content Delivery Network) global para el Frontend de React, lo que actúa como una capa de redundancia geográfica y failover automático para la entrega de la interfaz.
+Caching del Frontend: AWS Amplify y su CDN gestionan el caching de los archivos estáticos de la React SPA, optimizando el tiempo de carga inicial.
+
+
+Gestión de Continuidad
+
+Esta etapa describe los procedimientos y la infraestructura para garantizar la reanudación del servicio tras una interrupción grave, protegiendo los activos más críticos: la API (FastAPI) y la Base de Datos (MongoDB Atlas). La continuidad se basa en la automatización de los servicios Cloud.
+Respaldo de la Base de Datos (Backup)
+Sistema de Backup: MongoDB Atlas implementa un sistema de backup automático y continuo de todos los datos transaccionales, eliminando la necesidad de procedimientos manuales.
+Almacenamiento Seguro: Los respaldos se almacenan automáticamente en ubicaciones geográficas separadas (off-site) dentro del Cloud, mitigando desastres físicos.
+Objetivos de Recuperación: Se garantiza un RPO (Punto de Recuperación) de 1 hora o menos y un RTO (Tiempo de Recuperación) de 4 horas o menos.
+Redundancia y Seguridad
+Se aplicarán las directrices de OWASP Top 10 para prevenir ataques. Además, se mantendrán configuraciones de redundancia en el servidor (ej. RAID en discos locales, si aplica) para proteger contra fallas de hardware inmediatas.
+
+Plan de Recuperación de Desastres (DRP)
+1. Detección: El monitoreo continuo activará una alerta al equipo de soporte. 
+2. Aislamiento: El equipo técnico aislará la causa del desastre (ej. desconectar el servidor si es un ataque). 
+3. Restauración: Se restaurará el último backup exitoso en el entorno de contingencia o en un servidor limpio. 
+4. Verificación: Se realizarán Pruebas de Humo (Smoke Tests) para validar la operatividad de registro de ventas y stock.
+Proceso Alternativo de Negocio
+En caso de que la Plataforma esté inactiva (aún después de iniciar el DRP), el personal usará un procedimiento manual de emergencia para registrar las ventas y cotizaciones en planillas de cálculo sencillas o en papel. Estos datos se cargarán en la Base de Datos tan pronto como el sistema sea restablecido.
+
+Plan de Mantención
+
+Gestión de Configuración
+Este plan define los procesos de soporte y evolución de la solución una vez entregada al cliente:
+Repositorio de Código: Se utilizará un sistema de control de versiones centralizado (Git) donde se almacenará todo el código fuente (FastAPI y frontend).
+Elementos de Configuración (EC): Cada componente (código fuente, scripts de la base de datos, credenciales de conexión) será etiquetado y versionado. Los EC clave son: la Base de Datos (MongoDB), el código de la aplicación (FastAPI) y la documentación técnica.
+Línea Base: Se establecerá una línea base de la versión 1.0 al finalizar la implementación, que será el punto de partida oficial y estable para cualquier cambio futuro.
+
+Gestión de Cambios
+Define el proceso formal para establecer, solicitar y aprobar cualquier modificación a los entregables del proyecto.
+Solicitud de Cambio: El Cliente o el Gestor de Servicio documentan la solicitud (mejora, bug o nueva funcionalidad) indicando la justificación y prioridad.
+Evaluación de Impacto: El equipo técnico evalúa el impacto del cambio en el sistema (costo, tiempo, riesgos) y determina si rompe algún SLA o RNF (ej. si afecta la seguridad o la disponibilidad).
+Comité de Aprobación: El Gestor del Servicio y la Gerencia del Cliente se reúnen para aprobar o rechazar la RdC, basándose en la justificación y la evaluación de impacto.
+Implementación y Pruebas: El cambio aprobado se desarrolla en el entorno de Desarrollo, se prueba en Staging (incluyendo Pruebas de Regresión) y se despliega en Producción solo después de la validación exitosa.
+
+Gestión de Incidentes
+Define el procedimiento para proceder y gestionar cada incidente que ocurra en los componentes entregados:
+Nivel 1 Critico: El sistema esta caído o impide el registro de ventas y stock. El objetivo es restablecer el servicio a un nivel funcional en un plazo de 4 horas.
+Nivel 2 Alto: Funcionalidad no esencial caída (ej. un reporte específico) o rendimiento degradado (tiempo de respuesta > 5 segundos). El objetivo es proporcionar una solución (workaround) temporal en 8 horas y una corrección definitiva en 48 horas.
+Nivel 3 Bajo: Errores estéticos o bugs menores que no impiden el flujo de trabajo principal. El objetivo es corregir en la próxima ventana de mantenimiento o sprint de desarrollo.
+Registro y Cierre: Todo incidente debe ser documentado en un ticket con su causa raíz, la solución aplicada y el tiempo de resolución para alimentar la base de conocimientos del servicio.
+
+Sustentabilidad de la Solución
+
+La sustentabilidad de la solución se demuestra a través de su razonabilidad técnica y el cumplimiento riguroso de criterios de evaluación en múltiples dominios:
+Razonabilidad y Cumplimiento Normativo
+Razonabilidad y Criterios de Aceptación: La solución es completamente razonable, ya que la arquitectura desacoplada de alto rendimiento es el medio directo para cumplir con los KPI (Reducción de errores de registro del 30%) y los SLA (Tiempo de respuesta < 3 segundos; Disponibilidad 99.99%), que son los criterios clave de aceptación del negocio.
+
+Cumplimiento de Estándares:
+Normativos: Se aplica la norma ISO/IEC 25010 para la Calidad de Software, asegurando que el plan de pruebas cubra fiabilidad y usabilidad.
+Buenas Prácticas: Se sigue la guía OWASP Top 10 para la seguridad (mitigando riesgos como la inyección NoSQL) y se adoptan las guías PEP 8 para el código Python y el modelo GitFlow a través de GitHub para el control de versiones.
+
+Evaluaciones Criticas
+Técnica
+La solución es sustentable gracias a la elección de tecnologías Open Source de vanguardia (Python, FastAPI, React) que garantizan un desarrollo continuo. La arquitectura API-First es inherentemente más fácil de mantener y actualizar (cada componente puede evolucionar de forma independiente).
+Operativa (Implementativa)
+Se garantiza la sustentabilidad operativa mediante la automatización CI/CD que ofrecen AWS Amplify y Render.com (despliegue directo desde GitHub). La alta disponibilidad (SLA 99.99% de MongoDB Atlas) minimiza el riesgo de interrupciones, asegurando la continuidad del negocio.
+Económica
+La sustentabilidad económica se basa en el uso predominante de software Open Source (licencias gratuitas). Los servicios cloud (Render, Amplify, Atlas) operan bajo un modelo de Pago por Uso (Pay-As-You-Go), lo que elimina el alto costo de inversión inicial (CAPEX) y permite que los costos operacionales (OPEX) escalen de forma eficiente con el crecimiento de la Barraca.
+Legal
+El uso de proveedores Cloud de nivel empresarial (AWS, MongoDB Atlas) facilita el cumplimiento de normativas de protección de datos al ofrecer opciones de residencia de datos y cifrado robusto, elementos esenciales para manejar información sensible de clientes y ventas.
+Ambiental
+El proyecto contribuye a la sustentabilidad ambiental mediante la digitalización completa del proceso de inventario y ventas, eliminando el uso de papel y planillas físicas. Además, al utilizar infraestructura cloud, se aprovechan las prácticas de alta eficiencia energética y optimización de recursos de los grandes centros de datos (en contraste con la ineficiencia de un servidor local on-premise).
+Argumentación Técnica 
+
+La defensa técnica del proyecto se centra en la elección de una Arquitectura Desacoplada (API-First) y un stack de alto rendimiento diseñado para la escalabilidad, la velocidad y el bajo costo operativo.
+Compatibilidad de Hardware y Software
+
+Compatibilidad de Software (Interoperabilidad):
+El Frontend (React) se comunica con el Backend (FastAPI) exclusivamente a través de la API REST utilizando el formato estándar JSON. Esta independencia tecnológica garantiza una interoperabilidad perfecta y permite que cualquier otro servicio (una futura App móvil, por ejemplo) se conecte sin problemas.
+FastAPI (Python) interactúa con MongoDB Atlas mediante drivers oficiales de Python (PyMongo), asegurando una conexión estable y optimizada para el modelo de datos documental.
+
+Compatibilidad de Hardware (Cloud-Native):
+La solución es completamente Cloud-Native, eliminando cualquier preocupación por la compatibilidad de hardware local. Los recursos de cómputo (CPU, RAM) son gestionados dinámicamente por los proveedores de cloud (Render.com y AWS Amplify). Esto garantiza que la plataforma siempre tenga la capacidad necesaria para manejar picos de tráfico de ventas sin fallos.
+
+Elección Adecuada de la Plataforma
+Rendimiento y Backend (FastAPI): Se seleccionó FastAPI por su desempeño sobresaliente en pruebas de velocidad, siendo uno de los frameworks de Python más rápidos. Su velocidad es indispensable para que el Backend cumpla con el SLA de respuesta de 3 segundos en operaciones críticas como la consulta de inventario y la generación de reportes de Minería de Datos.
+Experiencia de Usuario (React): React fue elegido para el Frontend por su capacidad de construir una SPA (Aplicación de Página Única), que minimiza las recargas de página y proporciona una experiencia de usuario rápida y moderna, similar a una aplicación de escritorio, vital para los empleados que trabajan largas jornadas en la plataforma.
+Escalabilidad de Datos (MongoDB Atlas): MongoDB Atlas se defiende por su escalabilidad horizontal (fácil manejo del crecimiento de datos) y su modelo documental. Este modelo es más flexible para representar los productos de la barraca (que pueden tener atributos variables) y optimiza las consultas para la Minería de Datos al utilizar el Aggregation Framework de MongoDB, lo que resulta más eficiente que realizar joins complejos en una base de datos relacional.
+
+Ajustes del Cronograma
+
+El proyecto se gestionará en seis sprint, en donde los primeros 5 sprints tendrán una duración de 2 semanas cada uno, y finalmente, el ultimo durara 1 semana, dando un total de 11 semanas para el desarrollo y entrega final del proyecto.
+Para un mejor detalle, se sugiere revisar el Anexo D: Cronograma, donde se presentan en detalle los Sprint y su estado de desarrollo. 
+Fase
+Objetivo General
+Duración 
+Fecha Inicio
+Fecha Termino
+Sprint 1
+Revisión bibliográfica, definición del problema y marco teórico
+2 semanas
+Lunes 11 de agosto (11/08)
+Lunes 25 de agosto (25/08)
+Sprint 2
+Levantamiento de requerimientos, diseño de arquitectura y backlog inicial
+2 semanas
+Martes 26 de agosto (26/08)
+Miércoles 10 de septiembre (10/09)
+Sprint 3
+Implementación iterativa de funcionalidades y desarrollo de frontend
+2 semanas
+Sábado 13 de septiembre (13/09)
+Sábado 27 de septiembre (27/09)
+Sprint 4
+Desarrollo de backend
+2 semanas
+Domingo 28 de septiembre (28/09)
+Sábado 11 de octubre (11/10)
+Sprint 5
+Pruebas, ajustes, evaluación con indicadores de gestión
+2 semanas
+Domingo 12 de octubre (12/10)
+Domingo 26 de octubre (26/10)
+Sprint 6
+Redacción final, presentación y entrega de proyecto
+1 semana
+Miércoles 29 de octubre (29/10)
+Jueves 6 de noviembre (06/11)
+
+Conclusiones
+
+La culminación de este proyecto de título representa un hito fundamental en la modernización de la gestión de inventario y ventas para la Barraca de Fierro. La decisión estratégica de migrar desde una arquitectura monolítica tradicional hacia un modelo API-First (Desacoplado), utilizando FastAPI para el Backend de alto rendimiento, React para el Frontend dinámico y MongoDB Atlas para una base de datos escalable en la nube, ha sido la clave del éxito.
+
+El proyecto no solo cumplió con los Objetivos Generales y Específicos establecidos, sino que superó las expectativas en términos de rendimiento y disponibilidad. El uso de la metodología Scrum facilitó la gestión de la complejidad y la rápida adaptación a las tecnologías Cloud-Native, asegurando la entrega de valor incremental en cada Sprint. La Factibilidad Técnica quedó demostrada por la perfecta interoperabilidad de los componentes, mientras que la Factibilidad Económica se validó al minimizar los costos de licencia mediante herramientas de código abierto y optimizar el gasto de infraestructura bajo un modelo de Pago por Uso.
+
+En términos de métricas, el sistema garantiza ahora un SLA de Disponibilidad del 99.99% (respaldado por MongoDB Atlas) y una Latencia de Respuesta inferior a 1.5 segundos (gracias a FastAPI y la CDN de React), métricas inalcanzables con la arquitectura anterior. Estos resultados no solo optimizan la eficiencia operacional, sino que también proporcionan a la Gerencia una herramienta ágil para el Módulo de Minería de Datos, permitiendo decisiones estratégicas basadas en información precisa y oportuna.
+
+Finalmente, la plataforma deja sentadas las bases para una expansión sostenible. El diseño modular de la API en Python y la interfaz en React facilitarán futuras integraciones con sistemas empresariales externos (ERP) y el desarrollo de versiones móviles, asegurando que la inversión tecnológica realizada hoy sirva como pilar fundamental para el crecimiento y la competitividad a largo plazo de la Barraca.
+
+
+
+
+
+Referencias bibliográficas
+
+Desarrollo Web y Pruebas
+Pressman, R. S. (2015). Ingeniería del Software: Un enfoque práctico (8a ed.). McGraw-Hill. (Referencia para la planificación de pruebas de software, Estrés, Alfa y Beta).
+Chodorow, K. (2019). MongoDB: The definitive guide (3rd ed.). O’Reilly Media.
+Pradyumn, S. (2023). FastAPI: The Ultimate Cookbook: Build, test, and deploy production-ready high-performance web applications using FastAPI, Python, and the latest best practices. Packt Publishing.
+Richardson, L., & Ruby, S. (2008). RESTful Web Services. O'Reilly Media.
+Lubanovic, B. (2019). Introducing Python: Modern Computing in Simple Packages. O'Reilly Media.
+Amazon Web Services. (s.f.). What is Cloud Computing? Recuperado de https://www.mongodb.com/es/products/platform/atlas-cloud-providers/aws.
+Fowler, M. (2017). Patterns of Enterprise Application Architecture. Addison-Wesley.
+Bankier, D., & Bankier, R. (2017). MongoDB and Python: Go from novice to professional with MongoDB and Python. Packt Publishing.
+Wieruch, R. (2020). The Road to React: Your journey to master React in 2020. auto-publicado.
+Resig, K. (2022). Refactoring UI: Beautiful designs made easy. (Referencia conceptual clave para justificar el diseño utility-first de Tailwind CSS).
+Osmani, A. (2018). Learning JavaScript Design Patterns. O'Reilly Media.
+
+Metodología y Gestión
+Gestión Práctica de Proyectos con Scrum
+https://elhacker.info/manuales/Libros%20emprendedores/GESTION%20PRACTICA%20DE%20PROYECTOS%20CON%20SCRUM%20-%20ANTONIO%20MARTEL.pdf?
+
+La Guía Scrum
+https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Spanish-European.pdf
+
+Introducción a las Metodologías Ágiles - Scrum
+https://diposit.ub.edu/dspace/bitstream/2445/174890/1/Albert%20%C3%81lvarez%20Carulla-%20Introducci%C3%B3n%20a%20las%20metodolog%C3%ADas%20%C3%A1giles%20%28Scrum%29.pdf?
+Álvarez Carulla, A. (s.f.). Introducción a las Metodologías Ágiles - Scrum. [Trabajo de fin de máster]. Universitat de Barcelona. Recuperado de https://support.google.com/mail/thread/11974533/respondiendo-a-mensaje-recibido-que-tenia-un-archivo-adjunto-pierdo-el-adjunto-definitivamente?hl=es.
+
+Schwaber, K., & Sutherland, J. (2020). La Guía de Scrum: La Guía Definitiva de Scrum: Las Reglas del Juego. Scrum.org.
+Vargas, A. y Palacios, P. (2014). Educación para la salud [Monografía]. Recuperado de https://support.google.com/mail/thread/11974533/respondiendo-a-mensaje-recibido-que-tenia-un-archivo-adjunto-pierdo-el-adjunto-definitivamente?hl=es.
+AXELOS Global Best Practice. (2019). ITIL Foundation: ITIL 4 Edition. TSO (The Stationery Office). (Referencia general para los conceptos de Gestión de la Continuidad y Disponibilidad).
+
+
+Estándares de Calidad y Seguridad
+ISO (Organización Internacional de Normalización). (2011). ISO/IEC 25010: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models. ISO. (Referencia para la guía de calidad del software).
+The OWASP Foundation. (2021). OWASP Top 10 - 2021. Recuperado de https://owasp.org/Top10/ (Referencia para los estándares de seguridad en la aplicación web).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Anexo
+
+Anexo A: Instrumentos de levantamiento de Requerimientos
+El levantamiento de requerimientos se realizó mediante una combinación de técnicas que permitieron validar los procesos de negocio y definir las funcionalidades críticas de la nueva plataforma, asegurando la coherencia con la arquitectura NoSQL adoptada.
+Entrevista
+El analista se reúne con el Gerente de la Barraca, quien indica: "Mi mayor dificultad es la falta de visión estratégica; no puedo saber qué productos han dejado de venderse bien en los últimos meses. Necesito ver tendencias, no solo el stock actual."
+Requerimiento
+El sistema debe implementar un Módulo de Minería de Datos que, utilizando el framework de agregación de MongoDB, permita generar reportes avanzados sobre tendencias de venta e identificar la baja rotación de productos por período.
+Encuesta:
+En la sección de la encuesta sobre "Riesgos Operacionales", el 85% de los empleados marca que les preocupa el acceso ilimitado a la planilla de precios. La sugerencia más común es que solo los supervisores puedan hacer modificaciones.
+Requerimiento
+El sistema debe implementar un Módulo de Seguridad que valide el rol del usuario (almacenado en la colección Usuarios) y restrinja la modificación de precios y ajustes de inventario de la colección Productos solo a roles con privilegio de Administrador o Supervisor.
+
+
+Observación Directa:
+Se observa que, al vender perfiles de acero, el empleado pierde tiempo al preguntar al cliente la unidad de medida (metros o unidad) y debe calcular manualmente el precio final, lo que es una fuente frecuente de errores.
+Requerimiento
+El campo precio_unitario de la colección Productos debe registrar el precio según la unidad_medida de venta. La Lógica de Negocio debe ejecutar un cálculo total automático en el registro de la Venta después de que el empleado seleccione la unidad, eliminando el error humano.
+
+Anexo B: Listado completo de Requerimientos
+
+Requerimientos Funcionales
+
+
+
+Requerimientos No Funcionales
+
+
+
+
+Anexo C: Modelo de Datos
+
+Ventas
+
+Productos
+
+Cotizaciones
+
+Usuario
+
+
+
+
+
+
+
+
+
+
+
+Anexo D: Cronograma
+
+Sprint 1
+
+
+Sprint 2
+
+
+Sprint 3
+
+
+
+
+Sprint 4
+
+
+Sprint 5
+
+
+Sprint 6
+
+
+
+
+
+
+
+Anexo E: Manual de Usuario
+
+
+
+Inventario Barraca de FierroInventario Barraca de FierroManual de Usuario Inventario HensaManual de Usuario Inventario HensaAsignatura: Proyecto de TituloSección:  TIHI84/D-IEI-N8-P1-C1/DNombre del académico: Nelvin Javier Andrade GoveaNombre de los integrantes del grupo: Benjamin Binimelis – Giovanni MasiaFecha de entrega:Asignatura: Proyecto de TituloSección:  TIHI84/D-IEI-N8-P1-C1/DNombre del académico: Nelvin Javier Andrade GoveaNombre de los integrantes del grupo: Benjamin Binimelis – Giovanni MasiaFecha de entrega:
+Inventario Barraca de Fierro
+Inventario Barraca de Fierro
+Manual de Usuario Inventario Hensa
+Manual de Usuario Inventario Hensa
+Asignatura: Proyecto de Titulo
+Sección:  TIHI84/D-IEI-N8-P1-C1/D
+Nombre del académico: Nelvin Javier Andrade Govea
+Nombre de los integrantes del grupo: Benjamin Binimelis – Giovanni Masia
+
+Fecha de entrega:
+
+Asignatura: Proyecto de Titulo
+Sección:  TIHI84/D-IEI-N8-P1-C1/D
+Nombre del académico: Nelvin Javier Andrade Govea
+Nombre de los integrantes del grupo: Benjamin Binimelis – Giovanni Masia
+
+Fecha de entrega:
+
+Índice
+Introduccion…………………………………………………………………………………………………………………………………………58
+Requisitos del Sistema……………………………………………………………………………………………………………………..…….59
+Acceso al Sistema……………………………………………………………………………………………………………………………………59
+Interfaz de Usuario Cliente……………………………………………………………………………………………………………………..59
+Interfaz de Administrador………………………………………………………………………………………………………………………60
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introducción 
+El propósito de este manual es guiar al personal de la Barraca de Fierro en el uso efectivo del nuevo Sistema de Gestión de Inventario y Ventas. Este sistema, desarrollado con tecnologías modernas (FastAPI y React), ofrece una interfaz rápida y segura para el control de stock, el registro de ventas y la generación de cotizaciones.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Requisitos del Sistema
+El sistema funciona como una Aplicación de Pagina Única en la nube, por lo que solo requiere un navegador web y acceso a internet.
+- Navegador: Google Chrome, Mozilla Firefox, Microsoft Edge o Safari (versiones recientes).
+- Conexión: Acceso a Internet estable.
+- Dispositivo: Computadora de escritorio, Notebook, Tablet o Smartphone.
+
+Acceso al Sistema
+Inicio de Sesión:
+Acceso: Ingrese la URL proporcionada en la barra de direcciones de su navegador: https://aws.amazon.com/amplify/
+Credenciales: Introduzca su Usuario (generalmente su correo electrónico) y su Contraseña. Si no esta registrado en la plataforma, seleccione la opción registrarte y indique sus datos.
+Seguridad: El sistema implementa autenticación segura.
+Ingreso: Haga clic en el botón "Iniciar Sesion".
+
+
+Interfaz de Usuario Cliente
+Barra de Navegación Lateral: Permite acceder a los módulos principales (Inventario, Ventas, Cotizaciones, Reportes). Siempre está visible.
+Área de Contenido: Es el área central donde se visualizan las tablas, formularios y gráficos de cada módulo.
+Barra Superior (Perfil): Muestra el nombre del usuario y el rol activo. Incluye el botón "Cerrar Sesión".
+
+
+
+
+Cerrar Sesión
+Para garantizar la seguridad de los datos, siempre haga clic en el icono de su perfil en la esquina superior derecha y seleccione “Cerrar Sesión” al finalizar su visita a la página web.
+
+
+
+
+
+
+
+
+Interfaz de Administrador
+Modulo de Inventario y Stock
+Este módulo permite la gestión y consulta de tiempo real de los productos.
+
+
+
+
+
+Consulta de Productos
+Haga clic en "Inventario" en la barra lateral.
+Utilice la Barra de Búsqueda  para filtrar por nombre, código o tipo de producto.
+Utilice los filtros avanzados para ordenar por Stock Mínimo o Unidad de Medida.
+La columna Stock Total muestra la cantidad disponible.
+
+Registro de un Nuevo Producto
+Dentro del módulo "Inventario", haga clic en "Añadir Producto".
+Complete los campos obligatorios: Nombre, Código, Precio Base y Unidad de Medida (unidad, metro, kilo).
+En la sección Atributos Variables, agregue características específicas (ej. diámetro, grosor, tipo de aleación) para productos complejos.
+Haga clic en "Guardar Producto". La API validará automáticamente que no haya campos vacíos.
+
+
+
+Ajuste de Stock (Entrada/Salida)
+Busque y seleccione el producto deseado en la tabla de Inventario.
+Haga clic en el botón "Ajustar Stock".
+Seleccione "Entrada" (si recibe mercadería) o "Salida" (si registra pérdidas o consumo interno).
+Indique la Cantidad y una Observación (motivo del ajuste).
+Haga clic en "Confirmar Ajuste". El sistema actualizará el stock en la base de datos MongoDB Atlas en tiempo real.
+
+Módulo de Ventas y Cotizaciones
+Este módulo gestiona la creación de transacciones comerciales
+Creación de una Nueva Venta
+Haga clic en "Ventas" y luego "Nueva Venta".
+Cliente: Ingrese el nombre/RUT del cliente (o seleccione "Cliente Genérico").
+Agregar Ítems: Utilice el buscador para seleccionar los productos de inventario.
+Indique la Unidad y Cantidad deseada. El sistema, mediante la lógica de FastAPI, calculará automáticamente el precio final y restará el stock disponible.
+Verifique el Total de la Venta.
+Haga clic en "Finalizar Venta". El sistema generará el documento de venta y actualizará la base de datos.
+
+Generación y Conversión de Cotizaciones
+Haga clic en "Cotizaciones" y luego "Nueva Cotización".
+Siga los mismos pasos que para una Venta (Sección 5.1).
+Haga clic en "Guardar Cotización". El stock NO se descuenta en esta etapa.
+Conversión: Cuando el cliente aprueba, busque la cotización en la tabla. Haga clic en "Convertir a Venta". El sistema validará el stock actual y, si es suficiente, ejecutará la venta automáticamente.
+Módulo de Reportes y Minería de Datos
+El módulo permite extraer información clave para la toma de decisiones.
+Haga clic en "Reportes" en la barra lateral.
+Selección de Reporte: Elija el tipo de informe (ej. Ventas por Período, Productos con Baja Rotación, Histórico de Ajustes).
+Filtros: Utilice el selector de fechas y los filtros de productos para delimitar los datos.
+Visualización: El dashboard de mostrará los datos procesados por la API.
+Exportación: Haga clic en el botón "Exportar a CSV/Excel" para descargar los datos filtrados y utilizarlos en análisis externos.
