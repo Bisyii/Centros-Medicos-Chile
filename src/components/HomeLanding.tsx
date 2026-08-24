@@ -12,7 +12,7 @@ export const HomeLanding: React.FC = () => {
             <div className="bg-rose-600 p-2 rounded-xl text-white">
               <Heart className="h-5 w-5 fill-white/10" />
             </div>
-            <span className="text-slate-900 font-extrabold tracking-tight text-lg">MedFinder Chile</span>
+            <span className="text-slate-900 font-extrabold tracking-tight text-lg">Centros Medicos Chile</span>
           </div>
           <Link
             to="/buscar"
@@ -85,7 +85,7 @@ export const HomeLanding: React.FC = () => {
             <div className="bg-rose-600/20 p-2 rounded-xl text-rose-500">
               <Heart className="h-5 w-5" />
             </div>
-            <span className="text-white font-bold tracking-tight">MedFinder Chile</span>
+            <span className="text-white font-bold tracking-tight">Centros Medicos Chile</span>
           </div>
           <div className="flex flex-col items-center md:items-end gap-1.5 text-xs">
             <div className="flex items-center gap-1.5">
@@ -104,7 +104,7 @@ export const HomeLanding: React.FC = () => {
                 Políticas de Privacidad
               </Link>
               <span>|</span>
-              <p>© {new Date().getFullYear()} MedFinder Chile. Proyecto libre y gratuito.</p>
+              <p>© {new Date().getFullYear()} Centros Medicos Chile. Proyecto de código abierto y gratuito.</p>
             </div>
           </div>
         </div>
